@@ -20,7 +20,7 @@ public class gusamder extends OpMode {
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-
+        frontRightMotor.setPower(4);
         frontLeftMotor.setPower(1);
         sleep(100);
         frontLeftMotor.setPower(0);
