@@ -4,6 +4,8 @@ import static android.os.SystemClock.sleep;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -14,20 +16,25 @@ public class gusamder extends OpMode {
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
 
+    Servo left;
+
     @Override
     public void init() {
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
         backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        frontRightMotor.setPower(4);
-        frontLeftMotor.setPower(1);
-        sleep(100);
-        frontLeftMotor.setPower(0);
+        left = hardwareMap.get(Servo.class, "left");
+
+
+
+
+
     }
 
     @Override
     public void loop() {
+        frontRightMotor.setPower(gamepad1.right_stick_x);
 
     }
 }
