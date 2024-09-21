@@ -1,53 +1,47 @@
 package org.firstinspires.ftc.teamcode;
+import static android.os.SystemClock.sleep;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.lang.Math;
 
-    @TeleOp
-    public class canots extends LinearOpMode {
-        DcMotor frontLeftMotor;
-        DcMotor frontRightMotor;
-        DcMotor backLeftMotor;
-        DcMotor backRightMotor;
+@TeleOp
+public class canots extends OpMode {
+    DcMotor frontLeftMotor;
+    DcMotor frontRightMotor;
+    DcMotor backLeftMotor;
+    DcMotor backRightMotor;
 
-        Servo left;
-
-        @Override
-        public void runOpMode() throws InterruptedException {
-            frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-            backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-            backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-            frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-            left = hardwareMap.get(Servo.class, "left");
+    @Override
+    public void init() {
+        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
+        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
+        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
+        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
 
 
 
+    }
 
-        waitForStart();
+    @Override
+    public void loop() {
 
-        if (isStopRequested()) return;
+    double x = gamepad1.left_stick_x;
+    double y = gamepad1.left_stick_y;
+    double z = gamepad1.right_stick_x;
 
-        while (opModeIsActive()) {
-            double x = gamepad1.left_stick_x;
-            double y = gamepad1.left_stick_y;
-            double rx = gamepad1.right_stick_x;
+    double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(z), 1);
+    double frontLeftPower = (y + x + z) / denominator;
+    double frontRightPower = (y - x - z) / denominator;
+    double backLeftPower = (y - x + z) / denominator;
+    double backRightPower = (y + x + - z) / denominator;
 
-            double denominator = Math.max(Math.abs(y), Math.max(Math.abs(x), Math.abs(rx)));
-
-            double frontLeftPower = (y - x + rx) / denominator;
-            double frontRightPower = (y + x - rx) / denominator;
-            double backLeftPower = (y + x + rx) / denominator;
-            double backRightPower = (y - x - rx) / denominator;
-
-            frontLeftMotor.setPower(frontLeftPower);
-            frontRightMotor.setPower(frontRightPower);
-            backRightMotor.setPower(backRightPower);
-            backLeftMotor.setPower(backLeftPower);
-
-
-        }
+    frontRightMotor.setPower(frontRightPower);
+    frontLeftMotor.setPower(frontLeftPower);
+    backLeftMotor.setPower(backLeftPower);
+    backRightMotor.setPower(backRightPower);
     }
 }
