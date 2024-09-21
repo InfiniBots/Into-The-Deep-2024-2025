@@ -14,7 +14,7 @@ public class gusamder extends OpMode {
 
     @Override
     public void init() {
-        /* cusmadre sucks*/
+        /* cusmadre suckss*/
     }
 
     @Override
