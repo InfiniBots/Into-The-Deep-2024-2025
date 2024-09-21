@@ -14,7 +14,7 @@ public class gusamder extends OpMode {
 
     @Override
     public void init() {
-
+        system.out.println('canst')
     }
 
     @Override
