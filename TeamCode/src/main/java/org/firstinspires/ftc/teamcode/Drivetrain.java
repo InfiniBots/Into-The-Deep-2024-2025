@@ -28,8 +28,8 @@ public class Drivetrain extends OpMode {
     public void loop() {
 
            double x = gamepad1.left_stick_x;
-           double y = -gamepad1.left_stick_y;
-           double turn = gamepad1.right_stick_x;
+           double y = gamepad1.right_stick_x;
+           double turn = gamepad1.left_stick_y;
 
             double theta = Math.atan2(y, x);
             double power = Math.hypot(x, y);
