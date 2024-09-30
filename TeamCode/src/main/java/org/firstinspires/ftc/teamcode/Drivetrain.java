@@ -46,7 +46,7 @@ public class Drivetrain extends OpMode {
                 backRight /= power + Math.abs(turn);
             }
 
-            frontLeftMotor.setPower(frontLeft/-1);
+            frontLeftMotor.setPower(frontLeft/-1); /* hi cants*/
             backLeftMotor.setPower(backLeft/-1);
             frontRightMotor.setPower(frontRight);
             backRightMotor.setPower(backRight);
