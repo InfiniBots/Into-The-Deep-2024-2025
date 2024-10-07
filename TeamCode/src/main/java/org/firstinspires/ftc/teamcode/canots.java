@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class canots extends OpMode {
@@ -11,6 +12,8 @@ public class canots extends OpMode {
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
 
+    Servo Servo1;
+
     @Override
     public void init() {
         frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
@@ -18,6 +21,8 @@ public class canots extends OpMode {
         backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
 
+        int cants;
+        cants = 1;
 
 
     }
@@ -39,5 +44,6 @@ public class canots extends OpMode {
     frontLeftMotor.setPower(frontLeftPower/-1);
     backLeftMotor.setPower(backLeftPower/-1);
     backRightMotor.setPower(backRightPower);
+
     }
 }
