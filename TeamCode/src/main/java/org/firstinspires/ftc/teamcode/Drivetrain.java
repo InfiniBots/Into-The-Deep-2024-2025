@@ -23,7 +23,7 @@ public class Drivetrain extends OpMode {
     @Override
     public void loop() {
 
-           double x = gamepad1.left_stick_x;
+           double x = -gamepad1.left_stick_x;
            double y = gamepad1.left_stick_y;
            double turn = gamepad1.right_stick_x;
 
@@ -46,10 +46,10 @@ public class Drivetrain extends OpMode {
                 backRight /= power + Math.abs(turn);
             }
 
-            frontLeftMotor.setPower(frontLeft/-1); /* hi cants*/
-            backLeftMotor.setPower(backLeft/-1);
-            frontRightMotor.setPower(frontRight);
-            backRightMotor.setPower(backRight);
+            frontLeftMotor.setPower(frontLeft/-1.25); /* hi cants*/
+            backLeftMotor.setPower(backLeft/-1.25);
+            frontRightMotor.setPower(frontRight/1.25);
+            backRightMotor.setPower(backRight/1.25);
 
         }
     }
