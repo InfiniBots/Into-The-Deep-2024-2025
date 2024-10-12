@@ -54,12 +54,12 @@ public class Diddy extends OpMode {
             backRight /= power + Math.abs(turn);
         }
 
-        frontLeftMotor.setPower(frontLeft/-1); /* hi cants*/
-        backLeftMotor.setPower(backLeft/-1);
-        frontRightMotor.setPower(frontRight);
-        backRightMotor.setPower(backRight);
+        frontLeftMotor.setPower(frontLeft/-1.25); /* hi cants*/
+        backLeftMotor.setPower(backLeft/-1.25);
+        frontRightMotor.setPower(frontRight/1.25);
+        backRightMotor.setPower(backRight/1.25);
 
-        CRServo1.setPower(gamepad1.right_trigger);
+        CRServo1.setPower(gamepad1.right_trigger/-1);
 
 
     }

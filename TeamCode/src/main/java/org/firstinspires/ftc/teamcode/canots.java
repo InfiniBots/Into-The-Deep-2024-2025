@@ -24,7 +24,6 @@ public class canots extends OpMode {
         int cants;
         cants = 1;
 
-
     }
 
     @Override
@@ -40,10 +39,10 @@ public class canots extends OpMode {
     double backLeftPower = (y - x + z) / denominator;
     double backRightPower = (y + x + - z) / denominator;
 
-    frontRightMotor.setPower(frontRightPower);
-    frontLeftMotor.setPower(frontLeftPower/-1);
-    backLeftMotor.setPower(backLeftPower/-1);
-    backRightMotor.setPower(backRightPower);
+    frontRightMotor.setPower(frontRightPower/1.25);
+    frontLeftMotor.setPower(frontLeftPower/-1.25);
+    backLeftMotor.setPower(backLeftPower/-1.25);
+    backRightMotor.setPower(backRightPower/1.25);
 
     }
 }
