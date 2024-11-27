@@ -102,7 +102,7 @@ public class DriveEncoderLocalizer extends Localizer {
         return currentVelocity.copy();
     }
 
-    /**
+    /**2
      * This returns the current velocity estimate.
      *
      * @return returns the current velocity estimate as a Vector

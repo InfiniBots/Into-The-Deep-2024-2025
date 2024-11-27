@@ -8,9 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
-@TeleOp
 @Config
+@TeleOp
 public class Diddy extends LinearOpMode {
     DcMotor leftFront;
     DcMotor rightFront;
