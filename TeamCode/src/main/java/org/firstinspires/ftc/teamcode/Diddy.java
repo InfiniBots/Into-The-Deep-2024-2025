@@ -195,10 +195,10 @@ public class Diddy extends LinearOpMode {
             if(gamepad2.right_bumper) {
                 Servo0.setPosition(horizontal_claw);
             }
-            if(gamepad2.x) {
+            if (!currentGamepad1.x && previousGamepad1.x) {
                 Servo1.setPosition(claw_open);
             }
-            if(gamepad2.b) {
+            if (!currentGamepad1.b && previousGamepad1.b) {
                 Servo1.setPosition(claw_close);
             }
 
