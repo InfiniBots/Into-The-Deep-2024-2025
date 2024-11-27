@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -10,18 +10,23 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp
+@Config
 public class Diddy extends LinearOpMode {
-    DcMotor frontLeftMotor;
-    DcMotor frontRightMotor;
-    DcMotor backLeftMotor;
-    DcMotor backRightMotor;
-    CRServo CRServo1;
+    DcMotor leftFront;
+    DcMotor rightFront;
+    DcMotor leftRear;
+    DcMotor rightRear;
     DcMotor ExpMotor0;
     DcMotor ExpMotor1;
     DcMotor ExpMotor2;
     DcMotor ExpMotor3;
     Servo Servo0;
     Servo Servo1;
+
+    public static double horizontal_claw = 0.15;
+    public static double vertical_claw = 0.5;
+    public static double claw_open = 0;
+    public static double claw_close = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -47,43 +52,30 @@ public class Diddy extends LinearOpMode {
         int LeftPivotSubmersible = 3550;
         int RightPivotSubmersible = 3550;
 
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        leftRear = hardwareMap.get(DcMotor.class, "leftRear");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        rightRear = hardwareMap.get(DcMotor.class, "rightRear");
 
         ExpMotor0 = hardwareMap.get(DcMotor.class, "ExpMotor0");
         ExpMotor0.setDirection(DcMotorSimple.Direction.REVERSE);
         ExpMotor1 = hardwareMap.get(DcMotor.class, "ExpMotor1");
         ExpMotor2 = hardwareMap.get(DcMotor.class, "ExpMotor2");
+        ExpMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
         ExpMotor3 = hardwareMap.get(DcMotor.class, "ExpMotor3");
 
-        CRServo1 = hardwareMap.get(CRServo.class, "CRServo1");
         Servo0 = hardwareMap.get(Servo.class, "Servo0");
         Servo1 = hardwareMap.get(Servo.class, "Servo1");
 
-        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        ExpMotor0.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        ExpMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        ExpMotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        ExpMotor3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        ExpMotor0.setTargetPosition(LeftSlideDown);
-        ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        ExpMotor1.setTargetPosition(LeftSlideDown);
-        ExpMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        ExpMotor2.setTargetPosition(LeftPivotDown);
-        ExpMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        ExpMotor3.setTargetPosition(RightPivotDown);
-        ExpMotor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        Servo0.setPosition(0);
-        Servo1.setPosition(1);  
-
+        ExpMotor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ExpMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ExpMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ExpMotor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
         waitForStart();
@@ -95,15 +87,20 @@ public class Diddy extends LinearOpMode {
             currentGamepad1.copy(gamepad1);
             currentGamepad2.copy(gamepad2);
 
-            int position1 = ExpMotor0.getCurrentPosition();
-            int position2 = ExpMotor1.getCurrentPosition();
-            int position3 = ExpMotor2.getCurrentPosition();
-            int position4 = ExpMotor3.getCurrentPosition();
+            int position1 = leftRear.getCurrentPosition();
+            int position2 = leftFront.getCurrentPosition();
+            int position3 = rightRear.getCurrentPosition();
+            int position4 = rightFront.getCurrentPosition();
 
             int position1T = ExpMotor0.getTargetPosition();
             int position2T = ExpMotor1.getTargetPosition();
             int position3T = ExpMotor2.getTargetPosition();
             int position4T = ExpMotor3.getTargetPosition();
+
+            ExpMotor0.setPower(gamepad2.right_stick_y/-2);
+            ExpMotor1.setPower(gamepad2.right_stick_y/-2);
+            ExpMotor2.setPower(gamepad2.left_stick_y/-2);
+            ExpMotor3.setPower(gamepad2.left_stick_y/-2);
 
             double x = -gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
@@ -128,13 +125,13 @@ public class Diddy extends LinearOpMode {
                 backRight /= power + Math.abs(turn);
             }
 
-            frontLeftMotor.setPower(frontLeft / -1.25); /* hi cants*/
-            backLeftMotor.setPower(backLeft / -1.25);
-            frontRightMotor.setPower(frontRight / 1.25);
-            backRightMotor.setPower(backRight / 1.25);
+            leftFront.setPower(frontLeft / -1.25); /* hi cants*/
+            leftRear.setPower(backLeft / -1.25);
+            rightFront.setPower(frontRight / 1.25);
+            rightRear.setPower(backRight / 1.25);
 
 
-            if (gamepad2.y) {
+           /* if (gamepad2.y) {
                 ExpMotor0.setTargetPosition(LeftSlideFull);
                 ExpMotor1.setTargetPosition(RightSlideFull);
                 ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -152,8 +149,8 @@ public class Diddy extends LinearOpMode {
                 ExpMotor1.setPower(1);
             }
 
-            if (gamepad2.x) {
-                /*ExpMotor2.setTargetPosition(LeftPivotBucket);*/
+           if (gamepad2.x) {
+                ExpMotor2.setTargetPosition(LeftPivotBucket);
                 ExpMotor3.setTargetPosition(RightPivotBucket);
                 ExpMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ExpMotor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -162,7 +159,7 @@ public class Diddy extends LinearOpMode {
             }
 
             if (gamepad2.a) {
-                /*ExpMotor2.setTargetPosition(LeftPivotDown);*/
+                ExpMotor2.setTargetPosition(LeftPivotDown);
                 ExpMotor3.setTargetPosition(RightPivotDown);
                 ExpMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ExpMotor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -171,18 +168,10 @@ public class Diddy extends LinearOpMode {
 
             }
 
-            if (gamepad2.left_bumper) {
-                Servo0.setPosition(0.3);
-                Servo1.setPosition(-0.3);
-            }
 
-            if(gamepad2.right_bumper)   {
-                Servo0.setPosition(0);
-                Servo1.setPosition(0);
-            }
 
             if(gamepad1.left_bumper) {
-                /*ExpMotor2.setTargetPosition(LeftPivotSubmersible);*/
+                ExpMotor2.setTargetPosition(LeftPivotSubmersible);
                 ExpMotor3.setTargetPosition(RightPivotSubmersible);
                 ExpMotor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ExpMotor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -190,20 +179,33 @@ public class Diddy extends LinearOpMode {
                 ExpMotor3.setPower(0.5);
             }
 
-            if(gamepad1.right_bumper) {
+
+            if(gamepad2.right_bumper) {
                 ExpMotor0.setTargetPosition(LeftSlideSubmersible);
                 ExpMotor1.setTargetPosition(RightSlideSubmersible);
                 ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ExpMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ExpMotor0.setPower(0.5);
-                ExpMotor1.setPower(0.5);
+                ExpMotor0.setPower(1);
+                ExpMotor1.setPower(1);
+            }*/
+
+            if(gamepad2.left_bumper) {
+                Servo0.setPosition(vertical_claw);
+            }
+            if(gamepad2.right_bumper) {
+                Servo0.setPosition(horizontal_claw);
+            }
+            if(gamepad2.x) {
+                Servo1.setPosition(claw_open);
+            }
+            if(gamepad2.b) {
+                Servo1.setPosition(claw_close);
             }
 
-
-                telemetry.addData("Left Slide", position1);
-                telemetry.addData("Right Slide", position2);
-                telemetry.addData("Left Pivot", position3);
-                telemetry.addData("Right Pivot", position4);
+                telemetry.addData("Left Rear", position1);
+                telemetry.addData("Left Front", position2);
+                telemetry.addData("Right Rear", position3);
+                telemetry.addData("Right Front", position4);
                 telemetry.addData("Encoder Position", position1T);
                 telemetry.addData("Encoder Position", position2T);
                 telemetry.addData("Encoder Position", position3T);

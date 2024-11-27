@@ -38,11 +38,11 @@ public class DriveEncoderLocalizer extends Localizer {
     private Encoder leftRear;
     private Encoder rightRear;
     private double totalHeading;
-    public static double FORWARD_TICKS_TO_INCHES = 1;
-    public static double STRAFE_TICKS_TO_INCHES = 1;
-    public static double TURN_TICKS_TO_RADIANS = 1;
-    public static double ROBOT_WIDTH = 1;
-    public static double ROBOT_LENGTH = 1;
+    public static double FORWARD_TICKS_TO_INCHES = -0.00765;
+    public static double STRAFE_TICKS_TO_INCHES = 0.00775;
+    public static double TURN_TICKS_TO_RADIANS = -0.019225;
+    public static double ROBOT_WIDTH = 16.9;
+    public static double ROBOT_LENGTH = 17.1;
 
     /**
      * This creates a new DriveEncoderLocalizer from a HardwareMap, with a starting Pose at (0,0)
@@ -70,10 +70,10 @@ public class DriveEncoderLocalizer extends Localizer {
         rightFront = new Encoder(hardwareMap.get(DcMotorEx.class, rightFrontMotorName));
 
         // TODO: reverse any encoders necessary
-        leftFront.setDirection(Encoder.REVERSE);
+        leftFront.setDirection(Encoder.FORWARD);
         rightRear.setDirection(Encoder.REVERSE);
         leftRear.setDirection(Encoder.FORWARD);
-        rightRear.setDirection(Encoder.FORWARD);
+        rightFront.setDirection(Encoder.REVERSE);
 
         setStartPose(setStartPose);
         timer = new NanoTimer();

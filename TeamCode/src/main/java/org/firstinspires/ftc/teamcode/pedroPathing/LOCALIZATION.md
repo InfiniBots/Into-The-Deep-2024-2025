@@ -41,14 +41,14 @@ that applies to you and follow the directions there.
   this multiplier, then replace `TURN_TICKS_TO_RADIANS` in the localizer with your multiplier. Make sure
   you replace the number, not add on or multiply it to the previous number. The tuner takes into
   account your current multiplier.
-* Next, go on to `Forward Localizer Tuner`. You'll want to position a ruler alongside your robot.
-  By default, you'll want to push the robot 30 inches forward. Once you've pushed that far, or whatever
-  you set that value to, then the forward multiplier will be shown as the second number shown. The
-  first number is how far the robot thinks you've gone, and the second number is the multiplier you
-  need to have to scale your current readings to your goal of 30 inches, or the custom set distance.
-  Feel free to run a few more tests and average the results. Once you have this multiplier, then
-  replace `FORWARD_TICKS_TO_INCHES` in the localizer with your multiplier. Make sure you replace the number,
-  not add on or multiply it to the previous number. The tuner takes into account your current multiplier.
+  * Next, go on to `Forward Localizer Tuner`. You'll want to position a ruler alongside your robot.
+    By default, you'll want to push the robot 30 inches forward. Once you've pushed that far, or whatever
+    you set that value to, then the forward multiplier will be shown as the second number shown. The
+    first number is how far the robot thinks you've gone, and the second number is the multiplier you
+    need to have to scale your current readings to your goal of 30 inches, or the custom set distance.
+    Feel free to run a few more tests and average the results. Once you have this multiplier, then
+    replace `FORWARD_TICKS_TO_INCHES` in the localizer with your multiplier. Make sure you replace the number,
+    not add on or multiply it to the previous number. The tuner takes into account your current multiplier.
 * Finally, go to `Lateral Localizer Tuner`. You'll want to position a ruler alongside your robot.
   By default, you'll want to push the robot 30 inches to the right. Once you've pushed that far, or whatever
   you set that value to, then the lateral multiplier will be shown as the second number shown. The
