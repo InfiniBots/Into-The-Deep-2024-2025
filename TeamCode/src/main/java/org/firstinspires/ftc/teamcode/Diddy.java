@@ -22,10 +22,10 @@ public class Diddy extends LinearOpMode {
     Servo Servo0;
     Servo Servo1;
 
-    public static double horizontal_claw = 0.15;
-    public static double vertical_claw = 0.5;
-    public static double claw_open = 0;
-    public static double claw_close = 0.5;
+    public static double horizontal_claw = 0.635;
+    public static double vertical_claw = 0.3;
+    public static double claw_open = 0.25;
+    public static double claw_close = 0.55;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -96,10 +96,10 @@ public class Diddy extends LinearOpMode {
             int position3T = ExpMotor2.getTargetPosition();
             int position4T = ExpMotor3.getTargetPosition();
 
-            ExpMotor0.setPower(gamepad2.right_stick_y/-2);
-            ExpMotor1.setPower(gamepad2.right_stick_y/-2);
-            ExpMotor2.setPower(gamepad2.left_stick_y/-2);
-            ExpMotor3.setPower(gamepad2.left_stick_y/-2);
+            ExpMotor0.setPower(gamepad2.right_stick_y/-1);
+            ExpMotor1.setPower(gamepad2.right_stick_y/-1);
+            ExpMotor2.setPower(gamepad2.left_stick_y/-1.25);
+            ExpMotor3.setPower(gamepad2.left_stick_y/-1.25);
 
             double x = -gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
@@ -194,10 +194,10 @@ public class Diddy extends LinearOpMode {
             if(gamepad2.right_bumper) {
                 Servo0.setPosition(horizontal_claw);
             }
-            if (!currentGamepad1.x && previousGamepad1.x) {
+            if (gamepad2.x) {
                 Servo1.setPosition(claw_open);
             }
-            if (!currentGamepad1.b && previousGamepad1.b) {
+            if (gamepad2.b) {
                 Servo1.setPosition(claw_close);
             }
 
