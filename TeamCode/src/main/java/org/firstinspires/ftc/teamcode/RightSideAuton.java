@@ -29,9 +29,17 @@ public class RightSideAuton extends OpMode {
     public static double claw_open = 0.25;
     public static double claw_close = 0.55;
 
-    public static int sleep_time = 826;
-    public static int sleep_time2 = 1400;
-    public static int sleep_time3 = 1300;
+    public static int sleep_time = 4250;
+    public static int sleep_time2 = 1175;
+    /*
+    12.32 volt: 1200
+    13.34 volt: 1100
+    12.8 volt: 1175
+     14 volt:
+     */
+
+
+    public static int sleep_time3 = 1250;
     public static int sleep_time4 = 300;
     public static int sleep_time5= 800;
     public static int sleep_time6= 300;
@@ -81,10 +89,10 @@ public class RightSideAuton extends OpMode {
     @Override
     public void start() {
 
-        leftFront.setPower(0.5);
-        leftRear.setPower(0.5);
-        rightFront.setPower(-0.5);
-        rightRear.setPower(-0.5);
+        leftFront.setPower(0.2);
+        leftRear.setPower(0.2);
+        rightFront.setPower(-0.2);
+        rightRear.setPower(-0.2);
 
         sleep(sleep_time);
         leftFront.setPower(0);

@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 @TeleOp
-public class Diddy extends LinearOpMode {
+public class Main extends LinearOpMode {
     DcMotor leftFront;
     DcMotor rightFront;
     DcMotor leftRear;
@@ -38,12 +38,10 @@ public class Diddy extends LinearOpMode {
         Gamepad previousGamepad2 = new Gamepad();
 
 
-        int LeftSlideFull = 4390;
+        int LeftSlideFull = 2000;
         int LeftSlideDown = 0;
-        int RightSlideFull = 4390;
+        int RightSlideFull = 200;
         int RightSlideDown = 0;
-        int LeftSlideSubmersible = 500;
-        int RightSlideSubmersible = 500;
 
         int LeftPivotBucket = 1561;
         int RightPivotBucket = 1561;
@@ -72,6 +70,15 @@ public class Diddy extends LinearOpMode {
         rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        ExpMotor0.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ExpMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        ExpMotor0.setTargetPosition(LeftSlideDown);
+        ExpMotor1.setTargetPosition(RightSlideDown);
+
+        ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        ExpMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         ExpMotor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ExpMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ExpMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -87,8 +94,15 @@ public class Diddy extends LinearOpMode {
             currentGamepad1.copy(gamepad1);
             currentGamepad2.copy(gamepad2);
 
-            ExpMotor0.setPower(gamepad2.right_stick_y/-1);
-            ExpMotor1.setPower(gamepad2.right_stick_y/-1);
+            if(gamepad2.b) {
+                ExpMotor0.setTargetPosition(LeftSlideFull);
+                ExpMotor1.setTargetPosition(RightSlideFull);
+                ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ExpMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ExpMotor0.setPower(0.25);
+                ExpMotor1.setPower(0.25);
+            }
+
             ExpMotor2.setPower(gamepad2.left_stick_y/-1.25);
             ExpMotor3.setPower(gamepad2.left_stick_y/-1.25);
 
@@ -132,7 +146,7 @@ public class Diddy extends LinearOpMode {
             if (gamepad2.b) {
                 Servo1.setPosition(claw_close);
             }
-            
+
 
 
         }
