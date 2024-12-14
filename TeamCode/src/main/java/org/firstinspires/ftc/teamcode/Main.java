@@ -22,12 +22,15 @@ public class Main extends LinearOpMode {
     Servo Servo0;
     Servo Servo1;
 
-    public static double horizontal_claw = 0.635;
-    public static double vertical_claw = 0.3;
-    public static double claw_open = 0.25;
-    public static double claw_close = 0.55;
+    public static double horizontal_claw = 0.21;
+    public static double vertical_claw = 0.54;
+    public static double claw_open = 0.5;
+    public static double claw_close = 0.9;
     public static double max_slide = 4000;
 
+    public static int LeftSlideFull = 1400;
+
+    public static int RightSlideFull = 1400;
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -37,10 +40,7 @@ public class Main extends LinearOpMode {
         Gamepad previousGamepad1 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
 
-
-        int LeftSlideFull = 2000;
         int LeftSlideDown = 0;
-        int RightSlideFull = 200;
         int RightSlideDown = 0;
 
         int LeftPivotBucket = 1561;
@@ -94,12 +94,12 @@ public class Main extends LinearOpMode {
             currentGamepad1.copy(gamepad1);
             currentGamepad2.copy(gamepad2);
 
-            if(gamepad2.b) {
+            if(gamepad2.a) {
                 ExpMotor0.setTargetPosition(LeftSlideFull);
                 ExpMotor1.setTargetPosition(RightSlideFull);
                 ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ExpMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ExpMotor0.setPower(0.25);
+                ExpMotor0.setPower(-0.25);
                 ExpMotor1.setPower(0.25);
             }
 

@@ -24,10 +24,10 @@ public class RightSideAuton extends OpMode {
     Servo Servo0;
     Servo Servo1;
 
-    public static double horizontal_claw = 1;
-    public static double vertical_claw = 0.38;
-    public static double claw_open = 0.25;
-    public static double claw_close = 0.55;
+    public static double horizontal_claw = 0.21;
+    public static double vertical_claw = 0.54;
+    public static double claw_open = 0.5;
+    public static double claw_close = 0.9;
 
     public static int sleep_time = 4250;
     public static int sleep_time2 = 1175;
@@ -82,7 +82,7 @@ public class RightSideAuton extends OpMode {
         ExpMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ExpMotor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        Servo1.setPosition(0.55);
+        Servo1.setPosition(0.9);
 
         }
 
