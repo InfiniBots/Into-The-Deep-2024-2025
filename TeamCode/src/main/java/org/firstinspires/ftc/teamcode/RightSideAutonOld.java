@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 @Autonomous
-public class RightSideAuton extends OpMode {
+public class RightSideAutonOld extends OpMode {
     DcMotor leftFront;
     DcMotor rightFront;
     DcMotor leftRear;
