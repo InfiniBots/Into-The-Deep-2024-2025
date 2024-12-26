@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.app.usage.NetworkStats;
+
 import androidx.annotation.NonNull;
 
 
@@ -34,9 +36,9 @@ public class BlueSampleAuton extends LinearOpMode {
     public static double strafex1 = 9.5;
     public static double strafey1 = 33;
     public static double strafex2 = 57.5;
-    public static double strafey2 = 40;
+    public static double strafey2 = 38;
     public static double strafex3 = 57.5;
-    public static double strafey3 = 44;
+    public static double strafey3 = 47.5;
     public static double BucketDrop1Turn = 135;
     public static double BucketDrop1X = 53;
 
@@ -66,267 +68,181 @@ public class BlueSampleAuton extends LinearOpMode {
 
             rightslide = hardwareMap.get(DcMotorEx.class, "ExpMotor1");
             rightslide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rightslide.setDirection(DcMotorSimple.Direction.REVERSE);
         }
-        public class RightSlideFull implements Action {
+        public class SlideFull implements Action {
             private boolean initialized = false;
 
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
                     rightslide.setPower(0.5);
-                    initialized = true;
-                }
-
-                double pos = rightslide.getCurrentPosition();
-                packet.put("rightPivot", pos);
-                if (pos < 4200.0) {
-                    return true;
-                } else {
-                    rightslide.setPower(0);
-                    return false;
-                }
-
-            }
-        }
-        public class LeftSlideFull implements Action {
-            private boolean initialized = false;
-
-            @Override
-            public boolean run(@NonNull TelemetryPacket packet) {
-                if (!initialized) {
                     leftslide.setPower(0.5);
                     initialized = true;
                 }
 
-                double pos = leftslide.getCurrentPosition();
-                packet.put("rightPivot", pos);
-                if (pos < 4200.0) {
+                double pos = rightslide.getCurrentPosition();
+                double pos1 = leftslide.getCurrentPosition();
+                packet.put("rightSlide", pos);
+                packet.put("leftSlide", pos);
+                if (pos < 3500.0) {
                     return true;
-                } else {
+                }
+                if (pos1 < 3500.0) {
+                    return true;
+                }
+                else {
+                    rightslide.setPower(0);
                     leftslide.setPower(0);
                     return false;
                 }
 
             }
         }
-        public Action rightSlideFull() {
-            return new RightSlideFull();
+        public Action slideFull() {
+            return new SlideFull();
         }
 
-        public Action leftSlideFull() {
-            return new LeftSlideFull();
-        }
-        public class RightSlideDown implements Action {
+        public class SlideDown implements Action {
             private boolean initialized = false;
 
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
-                    rightslide.setPower(0.5);
+                    rightslide.setPower(-0.5);
+                    leftslide.setPower(-0.5);
                     initialized = true;
                 }
 
                 double pos = rightslide.getCurrentPosition();
-                packet.put("rightPivot", pos);
-                if (pos < 5.0) {
+                double pos1 = leftslide.getCurrentPosition();
+                packet.put("rightSlide", pos);
+                packet.put("leftSlide", pos1);
+                if (pos > 100.0) {
+                    return true;
+                }
+                if (pos1 > 100.0) {
                     return true;
                 } else {
                     rightslide.setPower(0);
-                    return false;
-                }
-
-            }
-        }
-        public class LeftSlideDown implements Action {
-            private boolean initialized = false;
-
-            @Override
-            public boolean run(@NonNull TelemetryPacket packet) {
-                if (!initialized) {
-                    leftslide.setPower(0.5);
-                    initialized = true;
-                }
-
-                double pos = leftslide.getCurrentPosition();
-                packet.put("rightPivot", pos);
-                if (pos < 5.0) {
-                    return true;
-                } else {
                     leftslide.setPower(0);
                     return false;
                 }
 
             }
         }
-        public Action rightSlideDown() {
-            return new RightSlideDown();
+        public Action slideDown() {
+            return new SlideDown();
         }
-
-        public Action leftSlideDown() {
-            return new LeftSlideDown();
-        }
-        public class RightSlideSpecimen implements Action {
+        public class SlideSpecimen implements Action {
             private boolean initialized = false;
 
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
                     rightslide.setPower(0.5);
+                    leftslide.setPower(0.5);
                     initialized = true;
                 }
 
                 double pos = rightslide.getCurrentPosition();
-                packet.put("rightPivot", pos);
+                double pos1 = leftslide.getCurrentPosition();
+                packet.put("rightSlide", pos);
+                packet.put("leftSlide", pos1);
                 if (pos < 1000.0) {
                     return true;
-                } else {
-                    rightslide.setPower(0);
-                    return false;
                 }
-
-            }
-        }
-        public class LeftSlideSpecimen implements Action {
-            private boolean initialized = false;
-
-            @Override
-            public boolean run(@NonNull TelemetryPacket packet) {
-                if (!initialized) {
-                    leftslide.setPower(0.5);
-                    initialized = true;
-                }
-
-                double pos = leftslide.getCurrentPosition();
-                packet.put("rightPivot", pos);
-                if (pos < 1000.0) {
+                if (pos1 < 1000.0) {
                     return true;
-                } else {
+                }
+                else {
+                    rightslide.setPower(0);
                     leftslide.setPower(0);
                     return false;
                 }
-
             }
+
         }
-        public Action rightSlideSpecimen() {
-            return new RightSlideSpecimen();
+        public Action slideSpecimen() {
+            return new SlideSpecimen();
         }
 
-        public Action leftSlideSpecimen() {
-            return new LeftSlideSpecimen();
-        }
     }
 
     public class Pivot {
         private DcMotorEx rightpivot;
         private DcMotorEx leftpivot;
-
         public Pivot(HardwareMap hardwareMap) {
-            rightpivot = hardwareMap.get(DcMotorEx.class, "ExpMotor3");
+            rightpivot = hardwareMap.get(DcMotorEx.class, "ExpMotor2");
             rightpivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            rightpivot.setDirection(DcMotorSimple.Direction.REVERSE);
             leftpivot = hardwareMap.get(DcMotorEx.class, "ExpMotor3");
             leftpivot.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             leftpivot.setDirection(DcMotorSimple.Direction.REVERSE);
+
         }
 
-        public class RightPivotBucket implements Action {
+        public class PivotBucket implements Action {
             private boolean initialized = false;
 
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
                     rightpivot.setPower(0.5);
+                    leftpivot.setPower(0.5);
                     initialized = true;
                 }
 
                 double pos = rightpivot.getCurrentPosition();
                 packet.put("rightPivot", pos);
-                if (pos < 1500.0) {
+                double pos1 = leftpivot.getCurrentPosition();
+                packet.put("leftPivot", pos1);
+                if (pos < 100.0) {
+                    return true;
+                }
+                if (pos1 < 100.0) {
                     return true;
                 } else {
                     rightpivot.setPower(0);
-                    return false;
-                }
-
-            }
-        }
-
-        public class LeftPivotBucket implements Action {
-            private boolean initialized = false;
-
-            @Override
-            public boolean run(@NonNull TelemetryPacket packet) {
-                if (!initialized) {
-                    leftpivot.setPower(0.5);
-                    initialized = true;
-                }
-
-                double pos = leftpivot.getCurrentPosition();
-                packet.put("leftPivot", pos);
-                if (pos < 1500.0) {
-                    return true;
-                } else {
                     leftpivot.setPower(0);
                     return false;
                 }
+
             }
         }
 
-        public Action rightPivotBucket() {
-            return new RightPivotBucket();
+        public Action pivotBucket() {
+            return new PivotBucket();
         }
 
-        public Action leftPivotBucket() {
-            return new LeftPivotBucket();
-        }
-
-        public class LeftPivotPickup implements Action {
-            private boolean initialized = false;
-
-            @Override
-            public boolean run(@NonNull TelemetryPacket packet) {
-                if (!initialized) {
-                    leftpivot.setPower(0.5);
-                    initialized = true;
-                }
-
-                double pos = leftpivot.getCurrentPosition();
-                packet.put("leftPivot", pos);
-                if (pos < 3000.0) {
-                    return true;
-                } else {
-                    leftpivot.setPower(0);
-                    return false;
-                }
-            }
-        }
-        public class RightPivotPickup implements Action {
+        public class PivotPickup implements Action {
             private boolean initialized = false;
 
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
                     rightpivot.setPower(0.5);
+                    leftpivot.setPower(0.5);
                     initialized = true;
                 }
 
                 double pos = rightpivot.getCurrentPosition();
                 packet.put("rightPivot", pos);
+                double pos1 = leftpivot.getCurrentPosition();
+                packet.put("leftPivot", pos1);
                 if (pos < 3000.0) {
                     return true;
-                } else {
+                }
+                if (pos1 < 3000.0) {
+                    return true;
+                }else {
                     rightpivot.setPower(0);
+                    leftpivot.setPower(0);
                     return false;
                 }
 
             }
         }
-        public Action leftPivotPickup() {
-            return new LeftPivotPickup();
-        }
-        public Action rightPivotPickup() {
-            return new RightPivotPickup();
+        public Action pivotPickup() {
+            return new PivotPickup();
         }
     }
 
@@ -408,91 +324,38 @@ public class BlueSampleAuton extends LinearOpMode {
         RotationClaw clawrotate = new RotationClaw(hardwareMap);
 
         TrajectoryActionBuilder SpecimenPlace = drive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(strafex1, strafey1))
+                .strafeTo(new Vector2d(9.5, 33))
+                .strafeTo(new Vector2d(58.5, 40.5))
+                .waitSeconds(3)
+
+                .turn(Math.toRadians(135))
+                .strafeTo(new Vector2d(66, 53))
+                .waitSeconds(3)
+
+                .turn(Math.toRadians(-135))
+                .strafeTo(new Vector2d(68.5, 40.5))
+                .waitSeconds(3)
+
+                .turn(Math.toRadians(135))
+                .strafeTo(new Vector2d(66, 53))
+                .waitSeconds(3)
+
+                .turn(Math.toRadians(-135))
+                .strafeTo(new Vector2d(58, 21.5))
+                .turn(Math.toRadians(90))
+                .waitSeconds(3)
+
+                .turn(Math.toRadians(45))
+                .strafeTo(new Vector2d(66, 53))
                 .waitSeconds(3);
-
-        TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(strafex2, strafex2))
-                .strafeTo(new Vector2d(strafex3, strafey3));
-
-        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(initialPose)
-                .turn(Math.toRadians(BucketDrop1Turn))
-                .strafeTo(new Vector2d(BucketDrop1X, BucketDrop1Y));
-
-
-        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(initialPose)
-                .turn(Math.toRadians(SamplePickup2Turn))
-                .strafeTo(new Vector2d(SamplePickup2X, SamplePickup2Y));
-
-
-        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(initialPose)
-                .turn(Math.toRadians(BucketDrop2Turn))
-                .strafeTo(new Vector2d(BucketDrop2X, BucketDrop2Y));
-
-
-        TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(initialPose)
-                .turn(Math.toRadians(SamplePickup3Turn))
-                .strafeTo(new Vector2d(SamplePickup3X, SamplePickup3Y));
-
-
-        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(initialPose)
-                .turn(Math.toRadians(BucketDrop3Turn))
-                .strafeTo(new Vector2d(BucketDrop3X, BucketDrop3Y));
 
 
         waitForStart();
             Actions.runBlocking(
                     new SequentialAction(
-                            SpecimenPlace.build(),
-                            leftpivot.leftPivotBucket(),
-                            rightpivot.rightPivotBucket(),
-                            leftslide.leftSlideSpecimen(),
-                            rightslide.rightSlideSpecimen(),
-                            claw.openClaw(),
-
-                            SamplePickup1.build(),
-                            leftpivot.leftPivotPickup(),
-                            rightpivot.rightPivotPickup(),
-                            claw.closeClaw(),
-                            leftpivot.leftPivotBucket(),
-                            rightpivot.rightPivotBucket(),
-
-                            BucketDrop1.build(),
-                            leftslide.leftSlideFull(),
-                            rightslide.rightSlideFull(),
-                            leftslide.leftSlideDown(),
-                            rightslide.rightSlideDown(),
-
-                            SamplePickup2.build(),
-                            leftpivot.leftPivotPickup(),
-                            rightpivot.rightPivotPickup(),
-                            claw.closeClaw(),
-                            leftpivot.leftPivotBucket(),
-                            rightpivot.rightPivotBucket(),
-
-                            BucketDrop2.build(),
-                            leftslide.leftSlideFull(),
-                            rightslide.rightSlideFull(),
-                            leftslide.leftSlideDown(),
-                            rightslide.rightSlideDown(),
-
-                            SamplePickup3.build(),
-                            leftpivot.leftPivotPickup(),
-                            rightpivot.rightPivotPickup(),
-                            claw.closeClaw(),
-                            leftpivot.leftPivotBucket(),
-                            rightpivot.rightPivotBucket(),
-
-                            BucketDrop3.build(),
-                            leftslide.leftSlideFull(),
-                            rightslide.rightSlideFull(),
-                            leftslide.leftSlideDown(),
-                            rightslide.rightSlideDown()
-
+                            SpecimenPlace.build()
                     )
             );
-
-
         }
 
     }

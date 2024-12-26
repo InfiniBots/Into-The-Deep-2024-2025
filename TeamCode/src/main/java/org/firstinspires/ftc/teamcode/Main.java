@@ -4,8 +4,10 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
@@ -31,6 +33,7 @@ public class Main extends LinearOpMode {
     public static int LeftSlideFull = 1400;
 
     public static int RightSlideFull = 1400;
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -58,9 +61,6 @@ public class Main extends LinearOpMode {
         ExpMotor0 = hardwareMap.get(DcMotor.class, "ExpMotor0");
         ExpMotor0.setDirection(DcMotorSimple.Direction.REVERSE);
         ExpMotor1 = hardwareMap.get(DcMotor.class, "ExpMotor1");
-        ExpMotor2 = hardwareMap.get(DcMotor.class, "ExpMotor2");
-        ExpMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
-        ExpMotor3 = hardwareMap.get(DcMotor.class, "ExpMotor3");
 
         Servo0 = hardwareMap.get(Servo.class, "Servo0");
         Servo1 = hardwareMap.get(Servo.class, "Servo1");
@@ -94,6 +94,7 @@ public class Main extends LinearOpMode {
             currentGamepad1.copy(gamepad1);
             currentGamepad2.copy(gamepad2);
 
+
             if(gamepad2.a) {
                 ExpMotor0.setTargetPosition(LeftSlideFull);
                 ExpMotor1.setTargetPosition(RightSlideFull);
@@ -102,9 +103,6 @@ public class Main extends LinearOpMode {
                 ExpMotor0.setPower(-0.25);
                 ExpMotor1.setPower(0.25);
             }
-
-            ExpMotor2.setPower(gamepad2.left_stick_y/-1.25);
-            ExpMotor3.setPower(gamepad2.left_stick_y/-1.25);
 
             double x = -gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
@@ -147,9 +145,9 @@ public class Main extends LinearOpMode {
                 Servo1.setPosition(claw_close);
             }
 
-
-
         }
     }
 }
+
+
 
