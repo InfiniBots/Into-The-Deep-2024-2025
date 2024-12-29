@@ -87,8 +87,8 @@ public class BlueSampleAuton extends LinearOpMode {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
-                    rightslide.setPower(0.6);
-                    leftslide.setPower(0.6);
+                    rightslide.setPower(1);
+                    leftslide.setPower(1);
                     initialized = true;
                 }
 
@@ -154,7 +154,7 @@ public class BlueSampleAuton extends LinearOpMode {
                 if (pos > SlideSpecimenDownPos) {
                     return true;
                 }
-                 else {
+                else {
                     rightslide.setPower(0);
                     leftslide.setPower(0);
                     return false;
@@ -447,7 +447,7 @@ public class BlueSampleAuton extends LinearOpMode {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 claw.setPosition(claw_open);
-                  return false;
+                return false;
             }
         }
 
@@ -491,10 +491,10 @@ public class BlueSampleAuton extends LinearOpMode {
                 .turn(Math.toRadians(-135))
                 .strafeTo(new Vector2d(58.25, 43.8));
 
-        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(58.5, 44, Math.toRadians(225)))
+        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(58.25, 43.8, Math.toRadians(225)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58.5, 44, Math.toRadians(90)))
+        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58.25, 43.8, Math.toRadians(90)))
                 .turn(Math.toRadians(135))
                 .strafeTo(new Vector2d(55, 55));
 
@@ -502,14 +502,15 @@ public class BlueSampleAuton extends LinearOpMode {
                 .waitSeconds(0.5);
 
         TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
-                .turn(Math.toRadians(-85))
-                .strafeTo(new Vector2d(51, 34));
+                .turn(Math.toRadians(-135))
+                .strafeTo(new Vector2d(47.5, 28.5))
+                .turn(Math.toRadians(90));
 
-        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(51, 34, Math.toRadians(140)))
+        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(47.5, 28.5, Math.toRadians(180)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(51, 34, Math.toRadians(140)))
-                .turn(Math.toRadians(85))
+        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(47.5, 28.5, Math.toRadians(180)))
+                .turn(Math.toRadians(45))
                 .strafeTo(new Vector2d(55, 55));
 
         TrajectoryActionBuilder wait7= drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
@@ -519,100 +520,100 @@ public class BlueSampleAuton extends LinearOpMode {
 
 
         waitForStart();
-            Actions.runBlocking(
-                    new SequentialAction(
+        Actions.runBlocking(
+                new SequentialAction(
 
-                            new ParallelAction(
-                            leftpivot.pivotSpecimen1(),
-                            rightpivot.pivotSpecimen1(),
-                            SpecimenPlace.build()),
+                        new ParallelAction(
+                                leftpivot.pivotSpecimen1(),
+                                rightpivot.pivotSpecimen1(),
+                                SpecimenPlace.build()),
 
-                            leftslide.slideSpecimen(),
-                            rightslide.slideSpecimen(),
-                            leftpivot.pivotSpecimen2(),
-                            rightpivot.pivotSpecimen2(),
-                            leftslide.slideSpecimenDown(),
-                            rightslide.slideSpecimenDown(),
-                            claw.openClaw(),
+                        leftslide.slideSpecimen(),
+                        rightslide.slideSpecimen(),
+                        leftpivot.pivotSpecimen2(),
+                        rightpivot.pivotSpecimen2(),
+                        leftslide.slideSpecimenDown(),
+                        rightslide.slideSpecimenDown(),
+                        claw.openClaw(),
 
-                            SamplePickup1.build(),
-                            leftpivot.pivotPickup(),
-                            rightpivot.pivotPickup(),
-                            claw.closeClaw(),
-                            wait2.build(),
-                            clawrotate.verticalClaw(),
+                        SamplePickup1.build(),
+                        leftpivot.pivotPickup(),
+                        rightpivot.pivotPickup(),
+                        claw.closeClaw(),
+                        wait2.build(),
+                        clawrotate.verticalClaw(),
 
-                            new ParallelAction(
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
-                            BucketDrop1.build(),
-                            leftslide.slideFull(),
-                            rightslide.slideFull()),
+                        new ParallelAction(
+                                leftpivot.pivotBucket1(),
+                                rightpivot.pivotBucket1(),
+                                BucketDrop1.build()),
 
-                            leftpivot.pivotBucket(),
-                            rightpivot.pivotBucket(),
-                            claw.openClaw(),
-                            wait3.build(),
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
+                        leftslide.slideFull(),
+                        rightslide.slideFull(),
+                        leftpivot.pivotBucket(),
+                        rightpivot.pivotBucket(),
+                        claw.openClaw(),
+                        wait3.build(),
+                        leftpivot.pivotBucket1(),
+                        rightpivot.pivotBucket1(),
 
-                            new ParallelAction(
-                            leftslide.slideDown(),
-                            rightslide.slideDown(),
-                            clawrotate.horizontalClaw(),
-                            SamplePickup2.build()),
+                        new ParallelAction(
+                                leftslide.slideDown(),
+                                rightslide.slideDown(),
+                                clawrotate.horizontalClaw(),
+                                SamplePickup2.build()),
 
-                            leftpivot.pivotPickup(),
-                            rightpivot.pivotPickup(),
-                            claw.closeClaw(),
-                            wait4.build(),
-                            clawrotate.verticalClaw(),
+                        leftpivot.pivotPickup(),
+                        rightpivot.pivotPickup(),
+                        claw.closeClaw(),
+                        wait4.build(),
+                        clawrotate.verticalClaw(),
 
-                            new ParallelAction(
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
-                            BucketDrop2.build(),
-                            leftslide.slideFull(),
-                            rightslide.slideFull()),
+                        new ParallelAction(
+                                leftpivot.pivotBucket1(),
+                                rightpivot.pivotBucket1(),
+                                BucketDrop2.build()),
 
-                            leftpivot.pivotBucket(),
-                            rightpivot.pivotBucket(),
-                            claw.openClaw(),
-                            wait5.build(),
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
+                        leftslide.slideFull(),
+                        rightslide.slideFull(),
+                        leftpivot.pivotBucket(),
+                        rightpivot.pivotBucket(),
+                        claw.openClaw(),
+                        wait5.build(),
+                        leftpivot.pivotBucket1(),
+                        rightpivot.pivotBucket1(),
 
-                            new ParallelAction(
-                            leftslide.slideDown(),
-                            rightslide.slideDown(),
-                            SamplePickup3.build()),
+                        new ParallelAction(
+                                leftslide.slideDown(),
+                                rightslide.slideDown(),
+                                SamplePickup3.build()),
 
-                            leftpivot.pivotPickup(),
-                            rightpivot.pivotPickup(),
-                            claw.closeClaw(),
-                            wait6.build(),
-                            clawrotate.verticalClaw(),
+                        leftpivot.pivotPickup(),
+                        rightpivot.pivotPickup(),
+                        claw.closeClaw(),
+                        wait6.build(),
+                        clawrotate.verticalClaw(),
 
-                            new ParallelAction(
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
-                            BucketDrop3.build(),
-                            leftslide.slideFull(),
-                            rightslide.slideFull()),
+                        new ParallelAction(
+                                leftpivot.pivotBucket1(),
+                                rightpivot.pivotBucket1(),
+                                BucketDrop3.build()),
 
-                            leftpivot.pivotBucket(),
-                            rightpivot.pivotBucket(),
-                            claw.openClaw(),
-                            wait7.build(),
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
-                            leftslide.slideDown(),
-                            rightslide.slideDown(),
-                            clawrotate.horizontalClaw()
+                        leftslide.slideFull(),
+                        rightslide.slideFull(),
+                        leftpivot.pivotBucket(),
+                        rightpivot.pivotBucket(),
+                        claw.openClaw(),
+                        wait7.build(),
+                        leftpivot.pivotBucket1(),
+                        rightpivot.pivotBucket1(),
+                        leftslide.slideDown(),
+                        rightslide.slideDown(),
+                        clawrotate.horizontalClaw()
 
-                    )
-            );
-        }
-
+                )
+        );
     }
+
+}
 
