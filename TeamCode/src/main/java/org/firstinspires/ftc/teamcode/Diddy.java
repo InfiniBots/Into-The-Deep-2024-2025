@@ -22,10 +22,10 @@ public class Diddy extends LinearOpMode {
     Servo Servo0;
     Servo Servo1;
 
-    public static double horizontal_claw = 0.21;
-    public static double vertical_claw = 0.54;
-    public static double claw_open = 0.5;
-    public static double claw_close = 0.9;
+    public static double vertical_claw = 0;
+    public static double horizontal_claw = 0.98;
+    public static double claw_open = 0;
+    public static double claw_close = 1;
     public static double max_slide = 4000;
 
     @Override

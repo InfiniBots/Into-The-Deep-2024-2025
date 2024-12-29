@@ -18,29 +18,28 @@ public class MeepMeepTesting {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.5, 61.6, Math.toRadians(90)))
-                .strafeTo(new Vector2d(9.5, 33))
-                .strafeTo(new Vector2d(58.5, 38.5))
+                .strafeTo(new Vector2d(9.5, 37.25))
+                .strafeTo(new Vector2d(50.75, 44.5))
                 .waitSeconds(3)
 
                 .turn(Math.toRadians(135))
-                .strafeTo(new Vector2d(66, 53))
+                .strafeTo(new Vector2d(55, 55))
                 .waitSeconds(3)
 
                 .turn(Math.toRadians(-135))
-                .strafeTo(new Vector2d(68.5, 38.5))
+                .strafeTo(new Vector2d(58.25, 43.75))
                 .waitSeconds(3)
 
                 .turn(Math.toRadians(135))
-                .strafeTo(new Vector2d(66, 53))
+                .strafeTo(new Vector2d(55, 55))
                 .waitSeconds(3)
 
-                .turn(Math.toRadians(-135))
-                .strafeTo(new Vector2d(58, 20))
-                .turn(Math.toRadians(90))
+                .turn(Math.toRadians(-73))
+                .strafeTo(new Vector2d(48.5, 37))
                 .waitSeconds(3)
 
-                .turn(Math.toRadians(45))
-                .strafeTo(new Vector2d(66, 53))
+                .turn(Math.toRadians(-73))
+                .strafeTo(new Vector2d(55, 55))
                 .waitSeconds(3)
                 .build());
 
