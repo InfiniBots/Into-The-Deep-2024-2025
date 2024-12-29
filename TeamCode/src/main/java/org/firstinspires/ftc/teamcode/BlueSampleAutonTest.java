@@ -87,8 +87,8 @@ public class BlueSampleAutonTest extends LinearOpMode {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
-                    rightslide.setPower(0.6);
-                    leftslide.setPower(0.6);
+                    rightslide.setPower(1);
+                    leftslide.setPower(1);
                     initialized = true;
                 }
 
@@ -491,10 +491,10 @@ public class BlueSampleAutonTest extends LinearOpMode {
                 .turn(Math.toRadians(-135))
                 .strafeTo(new Vector2d(58.25, 43.8));
 
-        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(58.5, 44, Math.toRadians(225)))
+        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(58.25, 43.8, Math.toRadians(225)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58.5, 44, Math.toRadians(90)))
+        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58.25, 43.8, Math.toRadians(90)))
                 .turn(Math.toRadians(135))
                 .strafeTo(new Vector2d(55, 55));
 
@@ -502,14 +502,15 @@ public class BlueSampleAutonTest extends LinearOpMode {
                 .waitSeconds(0.5);
 
         TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
-                .turn(Math.toRadians(-85))
-                .strafeTo(new Vector2d(51, 34));
+                .turn(Math.toRadians(-135))
+                .strafeTo(new Vector2d(47.5, 28.5))
+                .turn(Math.toRadians(90));
 
-        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(51, 34, Math.toRadians(140)))
+        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(47.5, 28.5, Math.toRadians(180)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(51, 34, Math.toRadians(140)))
-                .turn(Math.toRadians(85))
+        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(47.5, 28.5, Math.toRadians(180)))
+                .turn(Math.toRadians(45))
                 .strafeTo(new Vector2d(55, 55));
 
         TrajectoryActionBuilder wait7= drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
@@ -545,10 +546,10 @@ public class BlueSampleAutonTest extends LinearOpMode {
                         new ParallelAction(
                                 leftpivot.pivotBucket1(),
                                 rightpivot.pivotBucket1(),
-                                BucketDrop1.build(),
-                                leftslide.slideFull(),
-                                rightslide.slideFull()),
+                                BucketDrop1.build()),
 
+                        leftslide.slideFull(),
+                        rightslide.slideFull(),
                         leftpivot.pivotBucket(),
                         rightpivot.pivotBucket(),
                         claw.openClaw(),
@@ -571,10 +572,10 @@ public class BlueSampleAutonTest extends LinearOpMode {
                         new ParallelAction(
                                 leftpivot.pivotBucket1(),
                                 rightpivot.pivotBucket1(),
-                                BucketDrop2.build(),
-                                leftslide.slideFull(),
-                                rightslide.slideFull()),
+                                BucketDrop2.build()),
 
+                        leftslide.slideFull(),
+                        rightslide.slideFull(),
                         leftpivot.pivotBucket(),
                         rightpivot.pivotBucket(),
                         claw.openClaw(),
@@ -596,10 +597,10 @@ public class BlueSampleAutonTest extends LinearOpMode {
                         new ParallelAction(
                                 leftpivot.pivotBucket1(),
                                 rightpivot.pivotBucket1(),
-                                BucketDrop3.build(),
-                                leftslide.slideFull(),
-                                rightslide.slideFull()),
+                                BucketDrop3.build()),
 
+                        leftslide.slideFull(),
+                        rightslide.slideFull(),
                         leftpivot.pivotBucket(),
                         rightpivot.pivotBucket(),
                         claw.openClaw(),

@@ -22,12 +22,11 @@ public class MeepMeepTesting {
                 .strafeTo(new Vector2d(50.75, 44.5))
                 .waitSeconds(3)
 
-                .turn(Math.toRadians(135))
-                .strafeTo(new Vector2d(55, 55))
+
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
                 .waitSeconds(3)
 
-                .turn(Math.toRadians(-135))
-                .strafeTo(new Vector2d(58.25, 43.75))
+                .strafeToSplineHeading(new Vector2d(58.25, 43.75), Math.toRadians(90))
                 .waitSeconds(3)
 
                 .turn(Math.toRadians(135))
