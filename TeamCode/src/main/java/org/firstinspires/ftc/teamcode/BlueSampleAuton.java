@@ -39,9 +39,9 @@ public class BlueSampleAuton extends LinearOpMode {
 
     public static double PivotBucketPos = 1780;
     public static double PivotBucket1Pos = 1500;
-    public static double PivotSpecimen1Pos = 1500;
+    public static double PivotSpecimen1Pos = 1400;
     public static double PivotSpecimen2Pos = 1685;
-    public static double PivotPickupPos = 3500;
+    public static double PivotPickupPos = 3600;
     public static double SlideFullPos = 2900;
     public static double SlideSpecimenPos = 1200;
     public static double SlideDownPos = 50;
@@ -469,51 +469,45 @@ public class BlueSampleAuton extends LinearOpMode {
         RotationClaw clawrotate = new RotationClaw(hardwareMap);
 
         TrajectoryActionBuilder SpecimenPlace = drive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(9.5, 37.25));
+                .strafeTo(new Vector2d(9.5, 36));
 
-        TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(9.5, 37, Math.toRadians(90)))
+        TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(9.5, 36, Math.toRadians(90)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(new Pose2d(9.5, 37, Math.toRadians(90)))
-                .strafeTo(new Vector2d(50.75, 45));
+        TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(new Pose2d(9.5, 36, Math.toRadians(90)))
+                .strafeTo(new Vector2d(50.5, 45));
 
-        TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(50.75, 45, Math.toRadians(90)))
+        TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(50.5, 45, Math.toRadians(90)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(50.75, 45, Math.toRadians(90)))
-                .turn(Math.toRadians(135))
-                .strafeTo(new Vector2d(55, 55));
+        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(50.5, 45, Math.toRadians(90)))
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205));
 
         TrajectoryActionBuilder wait3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(135)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
-                .turn(Math.toRadians(-135))
-                .strafeTo(new Vector2d(58.25, 43.8));
+        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
+                .strafeToSplineHeading(new Vector2d(57.25, 45), Math.toRadians(90));
 
-        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(58.25, 43.8, Math.toRadians(225)))
+        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(57.25, 45, Math.toRadians(90)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58.25, 43.8, Math.toRadians(90)))
-                .turn(Math.toRadians(135))
-                .strafeTo(new Vector2d(55, 55));
+        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58, 43.5, Math.toRadians(90)))
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205));
 
-        TrajectoryActionBuilder wait5 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
+        TrajectoryActionBuilder wait5 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
-                .turn(Math.toRadians(-135))
-                .strafeTo(new Vector2d(47.5, 28.5))
-                .turn(Math.toRadians(90));
+        TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
+                .strafeToSplineHeading(new Vector2d(43.5, 19), Math.toRadians(160));
 
-        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(47.5, 28.5, Math.toRadians(180)))
+        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(43.5, 19, Math.toRadians(160)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(47.5, 28.5, Math.toRadians(180)))
-                .turn(Math.toRadians(45))
-                .strafeTo(new Vector2d(55, 55));
+        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(43.5, 19, Math.toRadians(160)))
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205));
 
-        TrajectoryActionBuilder wait7= drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(225)))
+        TrajectoryActionBuilder wait7= drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
                 .waitSeconds(0.5);
 
         Actions.runBlocking(claw.closeClaw());
