@@ -505,7 +505,7 @@ public class OldBlueSampleAuton extends LinearOpMode {
                 .strafeTo(new Vector2d(49.75, 44));
 
         TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(49.75, 44, Math.toRadians(90)))
-                .waitSeconds(1);
+                .waitSeconds(0.5);
 
         TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(49.75, 44, Math.toRadians(90)))
                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(200));
@@ -517,7 +517,7 @@ public class OldBlueSampleAuton extends LinearOpMode {
                 .strafeToSplineHeading(new Vector2d(59, 40.5), Math.toRadians(90));
 
         TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(59, 40.5, Math.toRadians(90)))
-                .waitSeconds(1);
+                .waitSeconds(0.5);
 
         TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(59, 40.5, Math.toRadians(90)))
                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(200));
@@ -540,8 +540,6 @@ public class OldBlueSampleAuton extends LinearOpMode {
         Actions.runBlocking(claw.closeClaw());
         Actions.runBlocking(leftpivot.pivotStart());
         Actions.runBlocking(rightpivot.pivotStart());
-
-
         waitForStart();
         Actions.runBlocking(
                 new SequentialAction(

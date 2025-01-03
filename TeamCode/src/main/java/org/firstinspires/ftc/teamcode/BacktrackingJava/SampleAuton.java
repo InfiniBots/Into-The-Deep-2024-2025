@@ -28,14 +28,14 @@ public class SampleAuton extends LinearOpMode {
     public static double vertical_claw = 0;
     public static double horizontal_claw = 1;
     public static double sample3_claw = 0.23;
-    public static double claw_open = 0.7;
+    public static double claw_open = 0;
     public static double claw_close = 1;
 
     public static double PivotBucketPos = 1780;
     public static double PivotStartPos = 500;
     public static double PivotBucket1Pos = 1500;
     public static double PivotSpecimen1Pos = 1400;
-    public static double PivotSpecimen2Pos = 1665;
+    public static double PivotSpecimen2Pos = 1650;
     public static double PivotPickupPos = 3600;
     public static double SlideFullPos = 3100;
     public static double SlideSpecimenPos = 1300;
@@ -498,10 +498,9 @@ public class SampleAuton extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         Drive drive = new Drive(hardwareMap, new Pose2d(9.5, 60.6, Math.toRadians(90)));
-
-
         Pose2d initialPose = new Pose2d(9.5, 60.6, Math.toRadians(90));
         Claw claw = new Claw(hardwareMap);
         Slide leftslide = new Slide(hardwareMap);
@@ -511,10 +510,10 @@ public class SampleAuton extends LinearOpMode {
         RotationClaw clawrotate = new RotationClaw(hardwareMap);
 
         TrajectoryActionBuilder SpecimenPlace = drive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(9.5, 36.25));
+                .strafeTo(new Vector2d(9.5, 36));
 
-        TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(9.5, 36.25, Math.toRadians(90)))
-                .waitSeconds(0.5);
+        TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(9.5, 36, Math.toRadians(90)))
+                .waitSeconds(1);
 
         TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(new Pose2d(9.5, 36, Math.toRadians(90)))
                 .strafeTo(new Vector2d(49.75, 44));
@@ -652,7 +651,7 @@ public class SampleAuton extends LinearOpMode {
 
                     )
             );
-
+            telemetry.update();
         }
     }
 }
