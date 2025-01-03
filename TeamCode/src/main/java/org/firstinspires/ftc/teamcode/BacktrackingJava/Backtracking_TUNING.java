@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Config
 @TeleOp(name = "Backtracking_Tuning", group = "Linear OpMode")
 public class Backtracking_TUNING extends LinearOpMode {
-    public static int timeBetween_Reads = 3000;
+    public static int timeBetween_Reads = 1000;
     MecDrive drive;
     ElapsedTime loopTime = new ElapsedTime();
     double total = 0.0, NumOfLoops = 0.0;
