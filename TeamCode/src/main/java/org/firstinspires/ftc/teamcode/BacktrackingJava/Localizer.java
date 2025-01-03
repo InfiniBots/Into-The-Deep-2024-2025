@@ -45,8 +45,8 @@ public class Localizer extends ThreeDeadWheelLocalizer {
         this.imu.resetYaw();
 
         //reset odowheels (Have to do this because RR's custom encoder class does not let you Reset)
-        DcMotor parx = hardwareMap.get(DcMotor.class, "par0");
-        DcMotor pary = hardwareMap.get(DcMotor.class, "par1");
+        DcMotor parx = hardwareMap.get(DcMotor.class, "leftRear");
+        DcMotor pary = hardwareMap.get(DcMotor.class, "rightFront");
         parx.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pary.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         parx.close();

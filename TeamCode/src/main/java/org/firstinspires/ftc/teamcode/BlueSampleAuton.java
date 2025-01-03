@@ -31,21 +31,21 @@ import com.acmerobotics.roadrunner.ParallelAction;
 public class BlueSampleAuton extends LinearOpMode {
 
     public static double vertical_claw = 0;
-    public static double horizontal_claw = 0.98;
-
+    public static double horizontal_claw = 1;
     public static double sample3_claw = 0.23;
-    public static double claw_open = 0;
+    public static double claw_open = 0.7;
     public static double claw_close = 1;
 
     public static double PivotBucketPos = 1780;
+    public static double PivotStartPos = 500;
     public static double PivotBucket1Pos = 1500;
     public static double PivotSpecimen1Pos = 1400;
-    public static double PivotSpecimen2Pos = 1685;
+    public static double PivotSpecimen2Pos = 1665;
     public static double PivotPickupPos = 3600;
-    public static double SlideFullPos = 2900;
-    public static double SlideSpecimenPos = 1200;
+    public static double SlideFullPos = 3100;
+    public static double SlideSpecimenPos = 1300;
     public static double SlideDownPos = 50;
-    public static double SlideSpecimenDownPos = 100;
+    public static double SlideSpecimenDownPos = 200;
 
     public static double strafex1 = 9.5;
     public static double strafey1 = 33;
@@ -175,8 +175,8 @@ public class BlueSampleAuton extends LinearOpMode {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
-                    rightslide.setPower(0.8);
-                    leftslide.setPower(0.8);
+                    rightslide.setPower(1);
+                    leftslide.setPower(1);
                     initialized = true;
                 }
 
@@ -218,6 +218,39 @@ public class BlueSampleAuton extends LinearOpMode {
 
         }
 
+
+        public class PivotStart implements Action {
+            private boolean initialized = false;
+
+            @Override
+            public boolean run(@NonNull TelemetryPacket packet) {
+                if (!initialized) {
+                    rightpivot.setPower(-0.8);
+                    leftpivot.setPower(-0.8);
+                    initialized = true;
+                }
+
+                double pos = rightpivot.getCurrentPosition();
+                packet.put("rightPivot", pos);
+                double pos1 = leftpivot.getCurrentPosition();
+                packet.put(" leftPivot", pos1);
+                if (pos < PivotStartPos) {
+                    return true;
+                }
+                if (pos1 < PivotStartPos) {
+                    return true;
+                } else {
+                    rightpivot.setPower(0);
+                    leftpivot.setPower(0);
+                    return false;
+                }
+
+            }
+        }
+
+        public Action pivotStart() {
+            return new PivotStart();
+        }
         public class PivotSpecimen1 implements Action {
             private boolean initialized = false;
 
@@ -289,8 +322,8 @@ public class BlueSampleAuton extends LinearOpMode {
             @Override
             public boolean run(@NonNull TelemetryPacket packet) {
                 if (!initialized) {
-                    rightpivot.setPower(0.8);
-                    leftpivot.setPower(0.8);
+                    rightpivot.setPower(1);
+                    leftpivot.setPower(1);
                     initialized = true;
                 }
 
@@ -469,48 +502,50 @@ public class BlueSampleAuton extends LinearOpMode {
         RotationClaw clawrotate = new RotationClaw(hardwareMap);
 
         TrajectoryActionBuilder SpecimenPlace = drive.actionBuilder(initialPose)
-                .strafeTo(new Vector2d(9.5, 36));
+                .strafeTo(new Vector2d(9.5, 36.25));
 
-        TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(9.5, 36, Math.toRadians(90)))
+        TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(9.5, 36.25, Math.toRadians(90)))
                 .waitSeconds(0.5);
 
         TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(new Pose2d(9.5, 36, Math.toRadians(90)))
-                .strafeTo(new Vector2d(50.5, 45));
+                .strafeTo(new Vector2d(49.75, 44));
 
-        TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(50.5, 45, Math.toRadians(90)))
+        TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(49.75, 44, Math.toRadians(90)))
+                .waitSeconds(1);
+
+        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(49.75, 44, Math.toRadians(90)))
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(200));
+
+        TrajectoryActionBuilder wait3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(200)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(50.5, 45, Math.toRadians(90)))
-                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205));
+        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(200)))
+                .strafeToSplineHeading(new Vector2d(59, 40.5), Math.toRadians(90));
 
-        TrajectoryActionBuilder wait3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(135)))
+        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(59, 40.5, Math.toRadians(90)))
+                .waitSeconds(1);
+
+        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(59, 40.5, Math.toRadians(90)))
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(200));
+
+        TrajectoryActionBuilder wait5 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(200)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
-                .strafeToSplineHeading(new Vector2d(57.25, 45), Math.toRadians(90));
+      TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(200)))
+                .strafeToSplineHeading(new Vector2d(45.75, 23), Math.toRadians(170));
 
-        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(57.25, 45, Math.toRadians(90)))
+        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(45.75, 23, Math.toRadians(170)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58, 43.5, Math.toRadians(90)))
-                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205));
+        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(45.75, 23, Math.toRadians(170)))
+                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(200));
 
-        TrajectoryActionBuilder wait5 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
-                .waitSeconds(0.5);
-
-        TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
-                .strafeToSplineHeading(new Vector2d(43.5, 19), Math.toRadians(160));
-
-        TrajectoryActionBuilder wait6= drive.actionBuilder(new Pose2d(43.5, 19, Math.toRadians(160)))
-                .waitSeconds(0.5);
-
-        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(43.5, 19, Math.toRadians(160)))
-                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205));
-
-        TrajectoryActionBuilder wait7= drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(205)))
+        TrajectoryActionBuilder wait7= drive.actionBuilder(new Pose2d(55, 55, Math.toRadians(200)))
                 .waitSeconds(0.5);
 
         Actions.runBlocking(claw.closeClaw());
+        Actions.runBlocking(leftpivot.pivotStart());
+        Actions.runBlocking(rightpivot.pivotStart());
 
 
         waitForStart();
@@ -526,6 +561,7 @@ public class BlueSampleAuton extends LinearOpMode {
                         rightslide.slideSpecimen(),
                         leftpivot.pivotSpecimen2(),
                         rightpivot.pivotSpecimen2(),
+                        wait1.build(),
                         leftslide.slideSpecimenDown(),
                         rightslide.slideSpecimenDown(),
                         claw.openClaw(),
@@ -576,11 +612,9 @@ public class BlueSampleAuton extends LinearOpMode {
                         wait5.build(),
                         leftpivot.pivotBucket1(),
                         rightpivot.pivotBucket1(),
-
-                        new ParallelAction(
-                                leftslide.slideDown(),
-                                rightslide.slideDown(),
-                                SamplePickup3.build()),
+                        leftslide.slideDown(),
+                        rightslide.slideDown()
+                               /* SamplePickup3.build()),
 
                         leftpivot.pivotPickup(),
                         rightpivot.pivotPickup(),
@@ -603,7 +637,7 @@ public class BlueSampleAuton extends LinearOpMode {
                         rightpivot.pivotBucket1(),
                         leftslide.slideDown(),
                         rightslide.slideDown(),
-                        clawrotate.horizontalClaw()
+                        clawrotate.horizontalClaw()*/
 
                 )
         );

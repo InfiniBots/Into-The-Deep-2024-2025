@@ -22,9 +22,9 @@ public class Diddy extends LinearOpMode {
     Servo Servo0;
     Servo Servo1;
 
-    public static double vertical_claw = 0;
-    public static double horizontal_claw = 0.98;
-    public static double claw_open = 0;
+    public static double vertical_claw = 1;
+    public static double horizontal_claw = 0;
+    public static double claw_open = 0.7;
     public static double claw_close = 1;
     public static double max_slide = 4000;
 
@@ -115,10 +115,10 @@ public class Diddy extends LinearOpMode {
                 backRight /= power + Math.abs(turn);
             }
 
-            leftFront.setPower(frontLeft / -1.25);
-            leftRear.setPower(backLeft / -1.25);
-            rightFront.setPower(frontRight / 1.25);
-            rightRear.setPower(backRight / 1.25);
+            leftFront.setPower(frontLeft / -1.1);
+            leftRear.setPower(backLeft / -1.1);
+            rightFront.setPower(frontRight/1.1);
+            rightRear.setPower(backRight/1.1);
 
             if(gamepad2.left_bumper) {
                 Servo0.setPosition(vertical_claw);

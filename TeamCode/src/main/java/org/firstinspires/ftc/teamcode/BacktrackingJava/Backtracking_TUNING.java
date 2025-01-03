@@ -11,8 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Config
 @TeleOp(name = "Backtracking_Tuning", group = "Linear OpMode")
 public class Backtracking_TUNING extends LinearOpMode {
-    //You can tune the time at which the program reads the IMU to find best accuracy
-    public static int timeBetween_Reads = 300;
+    public static int timeBetween_Reads = 3000;
     MecDrive drive;
     ElapsedTime loopTime = new ElapsedTime();
     double total = 0.0, NumOfLoops = 0.0;
