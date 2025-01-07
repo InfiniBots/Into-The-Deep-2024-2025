@@ -30,9 +30,9 @@ public class Main extends LinearOpMode {
     public static double claw_close = 0.9;
     public static double max_slide = 4000;
 
-    public static int LeftSlideFull = 1400;
+    public static int LeftSlideFull = 1200;
 
-    public static int RightSlideFull = 1400;
+    public static int RightSlideFull = 1200;
 
     @Override
     public void runOpMode() throws InterruptedException {

@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,27 +12,27 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 @TeleOp
 public class Diddy extends LinearOpMode {
-    DcMotor leftFront;
-    DcMotor rightFront;
-    DcMotor leftRear;
-    DcMotor rightRear;
-    DcMotor ExpMotor0;
-    DcMotor ExpMotor1;
-    DcMotor ExpMotor2;
-    DcMotor ExpMotor3;
+    DcMotorEx leftFront;
+    DcMotorEx rightFront;
+    DcMotorEx leftRear;
+    DcMotorEx rightRear;
+    DcMotorEx ExpMotor0;
+    DcMotorEx ExpMotor1;
+    DcMotorEx ExpMotor2;
+    DcMotorEx ExpMotor3;
     Servo Servo0;
     Servo Servo1;
 
     public static double vertical_claw = 1;
     public static double horizontal_claw = 0;
-    public static double claw_open = 0.7;
+    public static double diagonal_claw = 0.5;
+    public static double reversediagonal_claw = 0;
+    public static double claw_open = 0.55;
     public static double claw_close = 1;
     public static double max_slide = 4000;
 
     @Override
     public void runOpMode() throws InterruptedException {
-
-
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
         Gamepad previousGamepad1 = new Gamepad();
@@ -52,17 +53,17 @@ public class Diddy extends LinearOpMode {
         int LeftPivotSubmersible = 3550;
         int RightPivotSubmersible = 3550;
 
-        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotor.class, "leftRear");
-        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
-        rightRear = hardwareMap.get(DcMotor.class, "rightRear");
+        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
+        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
 
-        ExpMotor0 = hardwareMap.get(DcMotor.class, "ExpMotor0");
+        ExpMotor0 = hardwareMap.get(DcMotorEx.class, "ExpMotor0");
         ExpMotor0.setDirection(DcMotorSimple.Direction.REVERSE);
-        ExpMotor1 = hardwareMap.get(DcMotor.class, "ExpMotor1");
-        ExpMotor2 = hardwareMap.get(DcMotor.class, "ExpMotor2");
+        ExpMotor1 = hardwareMap.get(DcMotorEx.class, "ExpMotor1");
+        ExpMotor2 = hardwareMap.get(DcMotorEx.class, "ExpMotor2");
         ExpMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
-        ExpMotor3 = hardwareMap.get(DcMotor.class, "ExpMotor3");
+        ExpMotor3 = hardwareMap.get(DcMotorEx.class, "ExpMotor3");
 
         Servo0 = hardwareMap.get(Servo.class, "Servo0");
         Servo1 = hardwareMap.get(Servo.class, "Servo1");
@@ -89,8 +90,8 @@ public class Diddy extends LinearOpMode {
 
             ExpMotor0.setPower(gamepad2.right_stick_y/-1);
             ExpMotor1.setPower(gamepad2.right_stick_y/-1);
-            ExpMotor2.setPower(gamepad2.left_stick_y/-1.25);
-            ExpMotor3.setPower(gamepad2.left_stick_y/-1.25);
+            ExpMotor2.setPower(gamepad2.left_stick_y/-1);
+            ExpMotor3.setPower(gamepad2.left_stick_y/-1);
 
             double x = -gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
@@ -115,10 +116,10 @@ public class Diddy extends LinearOpMode {
                 backRight /= power + Math.abs(turn);
             }
 
-            leftFront.setPower(frontLeft / -1.1);
-            leftRear.setPower(backLeft / -1.1);
-            rightFront.setPower(frontRight/1.1);
-            rightRear.setPower(backRight/1.1);
+            leftFront.setPower(frontLeft / -1);
+            leftRear.setPower(backLeft / -1);
+            rightFront.setPower(frontRight);
+            rightRear.setPower(backRight);
 
             if(gamepad2.left_bumper) {
                 Servo0.setPosition(vertical_claw);
@@ -131,6 +132,9 @@ public class Diddy extends LinearOpMode {
             }
             if (gamepad2.b) {
                 Servo1.setPosition(claw_close);
+            }
+            if (gamepad2.a) {
+                Servo0.setPosition(diagonal_claw);
             }
             
 

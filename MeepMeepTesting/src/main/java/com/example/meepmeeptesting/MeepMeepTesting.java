@@ -34,7 +34,7 @@ public class MeepMeepTesting {
 
          myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.5, 60.6, Math.toRadians(90)))
                 .waitSeconds(0.5)
-                .strafeTo(new Vector2d(50, 42.5))
+                 .splineToSplineHeading(new Pose2d(50, 42.5, Math.toRadians(90)), Math.toRadians(90))
                 .waitSeconds(1)
                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205))
                 .waitSeconds(0.5)
