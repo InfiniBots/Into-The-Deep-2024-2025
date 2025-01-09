@@ -18,35 +18,16 @@ public class MeepMeepTesting {
                 .setDimensions(17.193, 16.818)
                 .build();
 
-        /*myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-9.5, 61.6, Math.toRadians(90)))
-                .strafeTo(new Vector2d(-9.5, 36))
-                .strafeTo(new Vector2d(-36, 36))
-                .strafeTo(new Vector2d(-36, 12))
-                .strafeTo(new Vector2d(-46, 12))
-                .strafeTo(new Vector2d(-48, 52.5))
-                .strafeToSplineHeading(new Vector2d(-38, 48), Math.toRadians(300))
-                .strafeToSplineHeading(new Vector2d(-9.5, 36), Math.toRadians(90))
-                .strafeToSplineHeading(new Vector2d(-7, 43), Math.toRadians(90))
-                .strafeToSplineHeading(new Vector2d(-38, 48), Math.toRadians(300))
-                .strafeToSplineHeading(new Vector2d(-9.5, 36), Math.toRadians(90))
-                .build());*/
-
 
          myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.5, 60.6, Math.toRadians(90)))
-                .waitSeconds(0.5)
-                 .splineToSplineHeading(new Pose2d(50, 42.5, Math.toRadians(90)), Math.toRadians(90))
-                .waitSeconds(1)
-                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205))
-                .waitSeconds(0.5)
-                .strafeToSplineHeading(new Vector2d(60, 40.5), Math.toRadians(90))
-                .waitSeconds(1)
-                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205))
-                .waitSeconds(0.5)
-                .strafeToSplineHeading(new Vector2d(43, 21.5), Math.toRadians(180))
-                .waitSeconds(0.5)
-                .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(205))
-                .waitSeconds(0.5)
-                .build());
+                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
+                 .strafeToSplineHeading(new Vector2d(48, 48), Math.toRadians(90))
+                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
+                 .strafeToSplineHeading(new Vector2d(58, 48), Math.toRadians(90))
+                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
+                 .strafeToSplineHeading(new Vector2d(46, 26), Math.toRadians(180))
+                 .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
+                                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)
