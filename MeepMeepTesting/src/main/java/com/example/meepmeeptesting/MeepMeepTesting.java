@@ -19,7 +19,7 @@ public class MeepMeepTesting {
                 .build();
 
 
-         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(9.5, 60.6, Math.toRadians(90)))
+         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(32.5, 62.5, Math.toRadians(90)))
                  .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
                  .strafeToSplineHeading(new Vector2d(48, 48), Math.toRadians(90))
                  .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
@@ -27,6 +27,7 @@ public class MeepMeepTesting {
                  .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
                  .strafeToSplineHeading(new Vector2d(46, 26), Math.toRadians(180))
                  .strafeToSplineHeading(new Vector2d(55, 55), Math.toRadians(225))
+                 .strafeToSplineHeading(new Vector2d(24, -11), Math.toRadians(180))
                                  .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)

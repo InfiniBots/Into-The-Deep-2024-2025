@@ -23,7 +23,7 @@ public class Diddy extends LinearOpMode {
     Servo Servo0;
     Servo Servo1;
 
-    public static double vertical_claw = 1;
+    public static double vertical_claw = 0.35;
     public static double horizontal_claw = 0;
     public static double diagonal_claw = 0.5;
     public static double reversediagonal_claw = 0;

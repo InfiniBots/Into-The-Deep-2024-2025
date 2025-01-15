@@ -30,9 +30,9 @@ public class Main extends LinearOpMode {
     public static double claw_close = 0.9;
     public static double max_slide = 4000;
 
-    public static int LeftSlideFull = 1200;
+    public static int LeftSlideFull = 850;
 
-    public static int RightSlideFull = 1200;
+    public static int RightSlideFull = 850;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -61,14 +61,12 @@ public class Main extends LinearOpMode {
         ExpMotor0 = hardwareMap.get(DcMotor.class, "ExpMotor0");
         ExpMotor0.setDirection(DcMotorSimple.Direction.REVERSE);
         ExpMotor1 = hardwareMap.get(DcMotor.class, "ExpMotor1");
+        ExpMotor2 = hardwareMap.get(DcMotor.class, "ExpMotor2");
+        ExpMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
+        ExpMotor3 = hardwareMap.get(DcMotor.class, "ExpMotor3");
 
         Servo0 = hardwareMap.get(Servo.class, "Servo0");
         Servo1 = hardwareMap.get(Servo.class, "Servo1");
-
-        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         ExpMotor0.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         ExpMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -100,8 +98,8 @@ public class Main extends LinearOpMode {
                 ExpMotor1.setTargetPosition(RightSlideFull);
                 ExpMotor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ExpMotor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ExpMotor0.setPower(-0.25);
-                ExpMotor1.setPower(0.25);
+                ExpMotor0.setPower(-0.8);
+                ExpMotor1.setPower(0.8);
             }
 
             double x = -gamepad1.left_stick_x;
@@ -144,6 +142,9 @@ public class Main extends LinearOpMode {
             if (gamepad2.b) {
                 Servo1.setPosition(claw_close);
             }
+
+            ExpMotor2.setPower(gamepad2.left_stick_y/-1);
+            ExpMotor3.setPower(gamepad2.left_stick_y/-1);
 
         }
     }
