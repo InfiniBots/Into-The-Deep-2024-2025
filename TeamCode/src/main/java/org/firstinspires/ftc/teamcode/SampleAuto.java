@@ -31,16 +31,16 @@ public class SampleAuto extends LinearOpMode {
     public static double vertical_claw = 0;
     public static double horizontal_claw = 0.35;
     public static double sample3_claw = 0.23;
-    public static double claw_open = 0;
+    public static double claw_open = 0.65;
     public static double claw_close = 1;
 
-    public static double PivotBucketPos = 1195;
+    public static double PivotBucketPos = 1215;
     public static double PivotRungPos = 500;
     public static double PivotBucket1Pos = 1150;
-    public static double PivotSpecimen1Pos = 750;
-    public static double PivotSpecimen2Pos = 1175;
-    public static double PivotPickupPos = 3000;
-    public static double SlideFullPos = 2900;
+    public static double PivotSpecimen1Pos = 900;
+    public static double PivotSpecimen2Pos = 1200;
+    public static double PivotPickupPos = 3150;
+    public static double SlideFullPos = 2910;
     public static double SlideSpecimenPos = 1175;
     public static double SlideDownPos = 50;
     public static double SlideSpecimenDownPos = 200;
@@ -514,46 +514,44 @@ public class SampleAuto extends LinearOpMode {
                 .strafeToSplineHeading(new Vector2d(52, 52), Math.toRadians(225));
 
         TrajectoryActionBuilder wait1 = drive.actionBuilder(new Pose2d(52, 52, Math.toRadians(90)))
-                .waitSeconds(1.5);
-
-        TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(new Pose2d(52, 52, Math.toRadians(215)))
-                .strafeToSplineHeading(new Vector2d(49.25, 47.5), Math.toRadians(90));
-
-        TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(49.25, 47, Math.toRadians(90)))
-                .waitSeconds(0.75);
-
-        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(49.25, 47, Math.toRadians(90)))
-                .strafeToSplineHeading(new Vector2d(51, 51), Math.toRadians(215));
-
-        TrajectoryActionBuilder wait3 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(215)))
                 .waitSeconds(1);
 
-        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(215)))
-                .strafeToSplineHeading(new Vector2d(58, 47), Math.toRadians(90));
+        TrajectoryActionBuilder SamplePickup1 = drive.actionBuilder(new Pose2d(52, 52, Math.toRadians(225)))
+                .strafeToSplineHeading(new Vector2d(48.5, 46.75), Math.toRadians(90));
 
-        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(58, 47, Math.toRadians(90)))
+        TrajectoryActionBuilder wait2 = drive.actionBuilder(new Pose2d(48.5, 46.75, Math.toRadians(90)))
                 .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(58, 47, Math.toRadians(90)))
-                .strafeToSplineHeading(new Vector2d(51, 51), Math.toRadians(215));
+        TrajectoryActionBuilder BucketDrop1 = drive.actionBuilder(new Pose2d(48.5, 46.75, Math.toRadians(90)))
+                .strafeToSplineHeading(new Vector2d(51, 51), Math.toRadians(225));
 
-        TrajectoryActionBuilder wait5 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(215)))
+        TrajectoryActionBuilder wait3 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(225)))
                 .waitSeconds(1);
 
-        TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(215)))
-                .strafeToSplineHeading(new Vector2d(46, 26), Math.toRadians(180));
+        TrajectoryActionBuilder SamplePickup2 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(225)))
+                .strafeToSplineHeading(new Vector2d(57, 47), Math.toRadians(90));
 
-        TrajectoryActionBuilder wait6 = drive.actionBuilder(new Pose2d(46, 26, Math.toRadians(180)))
-                .waitSeconds(0.75);
+        TrajectoryActionBuilder wait4 = drive.actionBuilder(new Pose2d(57, 47, Math.toRadians(90)))
+                .waitSeconds(0.5);
 
-        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(46, 26, Math.toRadians(180)))
-                .strafeToSplineHeading(new Vector2d(51, 51), Math.toRadians(215));
+        TrajectoryActionBuilder BucketDrop2 = drive.actionBuilder(new Pose2d(57, 47, Math.toRadians(90)))
+                .strafeToSplineHeading(new Vector2d(51, 51), Math.toRadians(225));
 
-        TrajectoryActionBuilder wait7 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(215)))
+        TrajectoryActionBuilder wait5 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(225)))
                 .waitSeconds(1);
 
-        TrajectoryActionBuilder RungTouch = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(215)))
-                .strafeToSplineHeading(new Vector2d(49, 0), Math.toRadians(0));
+        TrajectoryActionBuilder SamplePickup3 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(225)))
+                .strafeToSplineHeading(new Vector2d(44.25, 24.75), Math.toRadians(180));
+
+        TrajectoryActionBuilder wait6 = drive.actionBuilder(new Pose2d(44.25, 24, Math.toRadians(180)))
+                .waitSeconds(0.5);
+
+        TrajectoryActionBuilder BucketDrop3 = drive.actionBuilder(new Pose2d(44.25, 23, Math.toRadians(180)))
+                .strafeToSplineHeading(new Vector2d(50.25, 50.25), Math.toRadians(225));
+
+        TrajectoryActionBuilder wait7 = drive.actionBuilder(new Pose2d(51, 51, Math.toRadians(225)))
+                .waitSeconds(1);
+
 
 
 
@@ -599,8 +597,8 @@ public class SampleAuto extends LinearOpMode {
                             rightslide.slideFull(),
                             leftpivot.pivotBucket(),
                             rightpivot.pivotBucket(),
-                            claw.openClaw(),
                             wait3.build(),
+                            claw.openClaw(),
                             leftpivot.pivotBucket1(),
                             rightpivot.pivotBucket1(),
 
@@ -625,8 +623,8 @@ public class SampleAuto extends LinearOpMode {
                             rightslide.slideFull(),
                             leftpivot.pivotBucket(),
                             rightpivot.pivotBucket(),
-                            claw.openClaw(),
                             wait5.build(),
+                            claw.openClaw(),
                             leftpivot.pivotBucket1(),
                             rightpivot.pivotBucket1(),
 
@@ -652,14 +650,7 @@ public class SampleAuto extends LinearOpMode {
                         leftpivot.pivotBucket(),
                         rightpivot.pivotBucket(),
                         claw.openClaw(),
-                        wait7.build(),
-                        clawrotate.horizontalClaw(),
-                            leftpivot.pivotBucket1(),
-                            rightpivot.pivotBucket1(),
-                            leftslide.slideDown(),
-                            rightslide.slideDown(),
-                            RungTouch.build()
-
+                            wait7.build()
                     )
             );
         }
