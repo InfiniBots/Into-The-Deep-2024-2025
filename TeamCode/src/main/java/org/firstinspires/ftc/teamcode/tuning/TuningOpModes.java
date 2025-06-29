@@ -11,7 +11,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
 
 import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
-import org.firstinspires.ftc.teamcode.*;
+import org.firstinspires.ftc.teamcode.pinpoint_tuning.MecanumDrive;
+import org.firstinspires.ftc.teamcode.pinpoint_tuning.PinpointDrive;
+import org.firstinspires.ftc.teamcode.pinpoint_tuning.SparkFunOTOSDrive;
+import org.firstinspires.ftc.teamcode.roadrunner_crap.TankDrive;
+import org.firstinspires.ftc.teamcode.roadrunner_crap.ThreeDeadWheelLocalizer;
+import org.firstinspires.ftc.teamcode.roadrunner_crap.TwoDeadWheelLocalizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

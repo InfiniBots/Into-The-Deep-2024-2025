@@ -1,7 +1,4 @@
-package org.firstinspires.ftc.teamcode;
-
-import static java.lang.Math.PI;
-import static java.lang.Math.tan;
+package org.firstinspires.ftc.teamcode.limelight;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;

@@ -1,5 +1,5 @@
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auton;
 
 import static android.os.SystemClock.sleep;
 
