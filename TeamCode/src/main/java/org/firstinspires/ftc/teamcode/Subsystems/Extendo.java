@@ -17,14 +17,9 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower;
 public class Extendo extends Subsystem {
     public static final Extendo INSTANCE = new Extendo();
     private Extendo() { }
-
     public MotorEx Extendo;
-    public static double kP = 0.005;
-    public static double kI = 0.0;
-    public static double kD = 0.0;
-    public static double kF = 0.0;
-    public static double tolerance = 10;
-    public PIDFController controller = new PIDFController(kP, kI, kD, new StaticFeedforward(kF), 10);
+    public static int tolerance = 10;
+    public PIDFController controller = new PIDFController(0.005, 0.0, 0.0, new StaticFeedforward(0.0), 10);
     public String extendoName = "ExpMotor2";
 
     public Command Extend() {
@@ -48,7 +43,7 @@ public class Extendo extends Subsystem {
                 this);
     }
 
-        public Command extendoManualRetract()  {
+    public Command extendoManualRetract()  {
         return new SetPower(Extendo,
                 -0.2,
                 this);
@@ -65,7 +60,6 @@ public class Extendo extends Subsystem {
     @Override
     public void initialize()  {
         Extendo = new MotorEx(extendoName);
-
 
     }
 

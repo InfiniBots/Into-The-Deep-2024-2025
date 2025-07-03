@@ -20,16 +20,11 @@ import java.util.Set;
 public class Lift extends Subsystem {
     public static final Lift INSTANCE = new Lift();
     private Lift() { }
-
     public MotorEx rightLift;
     public MotorEx leftLift;
     public MotorGroup liftMotors;
-    public static double kP = 0.005;
-    public static double kI = 0.0;
-    public static double kD = 0.0;
-    public static double kF = 0.0;
-    public static double tolerance = 10;
-    public PIDFController controller = new PIDFController(kP, kI, kD, new StaticFeedforward(kF), tolerance);
+    public static int tolerance = 10;
+    public PIDFController controller = new PIDFController(0.005, 0.0, 0.0, new StaticFeedforward(0.0), tolerance);
     public String rightLiftName = "ExpMotor0";
     public String leftLiftName = "ExpMotor1";
 
