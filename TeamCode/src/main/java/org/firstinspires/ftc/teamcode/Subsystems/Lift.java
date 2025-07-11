@@ -33,8 +33,6 @@ public class Lift extends Subsystem {
                 0.0,
                 controller,
                 this);
-        new ResetEncoder(leftLift, this);
-        new ResetEncoder(rightLift, this);
     }
 
     public Command liftHighBucket() {
@@ -78,7 +76,7 @@ public class Lift extends Subsystem {
     @Override
     public void initialize()  {
         rightLift = new MotorEx(rightLiftName);
-        leftLift = new MotorEx(leftLiftName);
+        leftLift = new MotorEx(leftLiftName).reverse();
         liftMotors = new MotorGroup(rightLift, leftLift);
     }
 

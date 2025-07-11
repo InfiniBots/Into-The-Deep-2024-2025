@@ -114,7 +114,7 @@ public class Diddy extends LinearOpMode {
             if ((power + Math.abs(turn)) > 1) {
                 frontLeft /= power + Math.abs(turn);
                 frontRight /= power + Math.abs(turn);
-                backLeft /= power + Math.abs(turn);
+                backLeft  /= power + Math.abs(turn);
                 backRight /= power + Math.abs(turn);
             }
 

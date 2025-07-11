@@ -30,11 +30,11 @@ public class Extendo extends Subsystem {
     }
 
     public Command Retract() {
-        return new RunToPosition(Extendo,
+         new RunToPosition(Extendo,
                 0.0,
                 controller,
                 this);
-        new ResetEncoder(Extendo, this);
+        return new ResetEncoder(Extendo, this);
     }
 
     public Command extendoManualExtend()  {
