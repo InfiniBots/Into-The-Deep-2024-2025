@@ -14,7 +14,7 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup;
 
 @TeleOp
 @Config
-public class LiftPIDF extends NextFTCOpMode {
+public class ExtendoPID extends NextFTCOpMode {
 
     public static double f = 0.0;
     public static double p = 0.0;
@@ -22,28 +22,22 @@ public class LiftPIDF extends NextFTCOpMode {
     public static double i = 0.0;
     public static int target = 0;
 
-    public static double ticksPerRevolution = 145.1;
-    public static double gearRatio = 0.8;
-    public MotorEx rightLift;
-    public MotorEx leftLift;
-    public MotorGroup liftMotors;
-    public String rightLiftName = "ExpMotor0";
-    public String leftLiftName = "ExpMotor1";
+    public static double ticksPerRevolution = 384.5;
+    public static double gearRatio = 1;
+    public MotorEx extendoMotor;
+    public String extendoMotorName = "ExpMotor2";
     private double calculateFeedforward() {
-        return Math.cos(Math.toRadians(target / ((ticksPerRevolution * gearRatio)/360)) * f );
+        return Math.cos(Math.toRadians(target / ((ticksPerRevolution * gearRatio)/360)) * f);
     }
     public PIDFController controller = new PIDFController(p, i, d, v -> calculateFeedforward(), 15);
     @Override
     public void onInit() {
-        rightLift = new MotorEx(rightLiftName);
-        leftLift = new MotorEx(leftLiftName).reverse();
-        rightLift.resetEncoder();
-        leftLift.resetEncoder();
-        liftMotors = new MotorGroup(rightLift, leftLift);
+        extendoMotor = new MotorEx(extendoMotorName);
+        extendoMotor.resetEncoder();
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        target = (int)rightLift.getCurrentPosition();
+        target = (int)extendoMotor.getCurrentPosition();
 
     }
 
@@ -52,11 +46,11 @@ public class LiftPIDF extends NextFTCOpMode {
         controller.setKP(p);
         controller.setKI(i);
         controller.setKD(d);
-        liftMotors.setPower(controller.calculate(rightLift.getCurrentPosition(), target));
+        extendoMotor.setPower(controller.calculate(extendoMotor.getCurrentPosition(), target));
 
-        telemetry.addData("Current Position", "%.1f ticks", rightLift.getCurrentPosition());
+        telemetry.addData("Current Position", "%.1f ticks", extendoMotor.getCurrentPosition());
         telemetry.addData("Target Position", "%d ticks", target);
-        telemetry.addData("Motor Power", "%.3f", rightLift.getPower());
+        telemetry.addData("Motor Power", "%.3f", extendoMotor.getPower());
         telemetry.update();
     }
 

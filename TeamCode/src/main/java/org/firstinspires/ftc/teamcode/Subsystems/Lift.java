@@ -81,7 +81,9 @@ public class Lift extends Subsystem {
     }
 
     public void periodic()  {
-        OpModeData.telemetry.addData("Lift Position", liftMotors.getCurrentPosition());
+        OpModeData.telemetry.addData("Lift Position", rightLift.getCurrentPosition());
+        OpModeData.telemetry.addData("Lift Power", rightLift.getPower());
+
 
     }
 
