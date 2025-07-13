@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @Config
-public class WristTesting extends OpMode {
-    Servo Wrist;
+public class ArmTesting extends OpMode {
+    Servo rightDeposit;
+    Servo leftDeposit;
     public static double transferPos = 0.0;
     public static double highBucketPos = 0.0;
     public static double lowBucketPos = 0.0;
@@ -17,7 +18,8 @@ public class WristTesting extends OpMode {
 
     @Override
     public void init() {
-        Wrist = hardwareMap.get(Servo.class, "Servo7");
+        rightDeposit = hardwareMap.get(Servo.class, "Servo2");
+        leftDeposit = hardwareMap.get(Servo.class, "Servo3");
     }
     Gamepad currentGamepad1 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
@@ -34,27 +36,33 @@ public class WristTesting extends OpMode {
         currentGamepad2.copy(gamepad2);
 
         if (currentGamepad1.a && !previousGamepad1.a) {
-            Wrist.setPosition(transferPos);
+            rightDeposit.setPosition(transferPos);
+            leftDeposit.setPosition(1 - transferPos);
         }
 
         if (currentGamepad1.b && !previousGamepad1.b) {
-            Wrist.setPosition(highBucketPos);
+            rightDeposit.setPosition(highBucketPos);
+            leftDeposit.setPosition(1 - highBucketPos);
         }
 
         if (currentGamepad1.x && !previousGamepad1.x) {
-            Wrist.setPosition(lowBucketPos);
+            rightDeposit.setPosition(lowBucketPos);
+            leftDeposit.setPosition(1 - lowBucketPos);
         }
 
         if (currentGamepad1.y && !previousGamepad1.y) {
-            Wrist.setPosition(specimenWallPos);
+            rightDeposit.setPosition(specimenWallPos);
+            leftDeposit.setPosition(1 - specimenWallPos);
         }
 
         if (currentGamepad1.right_bumper && !previousGamepad1.right_bumper) {
-            Wrist.setPosition(specimenChamberPos);
+            rightDeposit.setPosition(specimenChamberPos);
+            leftDeposit.setPosition(1 - specimenChamberPos);
         }
 
         if (currentGamepad1.dpad_up && !previousGamepad1.dpad_up) {
-            Wrist.setPosition(extraPos);
+            rightDeposit.setPosition(extraPos);
+            leftDeposit.setPosition(1 - extraPos);
         }
 
 
