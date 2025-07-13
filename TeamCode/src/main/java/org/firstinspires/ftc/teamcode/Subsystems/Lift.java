@@ -55,6 +55,13 @@ public class Lift extends Subsystem {
                 this);
     }
 
+    public Command liftTransfer() {
+        return new RunToPosition(liftMotors,
+                50.0,
+                controller,
+                this);
+    }
+
     public Command liftManualUp()  {
         return new SetPower(liftMotors,
                 0.8,
