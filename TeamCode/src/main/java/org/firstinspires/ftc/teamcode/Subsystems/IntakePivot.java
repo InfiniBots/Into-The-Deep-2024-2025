@@ -12,8 +12,8 @@ public class IntakePivot extends Subsystem {
     private IntakePivot() { }
     public Servo rightIntake;
     public Servo leftIntake;
-    public String rightIntakeName = "Servo6";
-    public String leftIntakeName = "Servo5";
+    public String rightIntakeName = "rightIntakeServo";
+    public String leftIntakeName = "leftIntakeServo";
 
     public Command transferPosition() {
         return new MultipleServosToPosition(

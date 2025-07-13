@@ -10,7 +10,7 @@ public class Wrist extends Subsystem {
     public static final Wrist INSTANCE = new Wrist();
     private Wrist() { }
     public Servo Wrist;
-    public String wristName = "Servo7";
+    public String wristName = "Wrist";
 
     public Command Transfer() {
         return new ServoToPosition(Wrist,

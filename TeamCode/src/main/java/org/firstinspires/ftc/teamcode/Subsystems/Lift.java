@@ -21,8 +21,8 @@ public class Lift extends Subsystem {
     public MotorGroup liftMotors;
     public static int tolerance = 10;
     public PIDFController controller = new PIDFController(0.005, 0.0, 0.0, new StaticFeedforward(0.0), tolerance);
-    public String rightLiftName = "ExpMotor0";
-    public String leftLiftName = "ExpMotor1";
+    public String rightLiftName = "rightLift";
+    public String leftLiftName = "leftLift";
 
     public Command resetZero() {
         return new InstantCommand(() -> { leftLift.resetEncoder(); rightLift.resetEncoder(); });

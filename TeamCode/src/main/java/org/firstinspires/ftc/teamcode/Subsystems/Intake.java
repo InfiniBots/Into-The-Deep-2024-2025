@@ -10,7 +10,7 @@ public class Intake extends Subsystem {
     public static final Intake INSTANCE = new Intake();
     private Intake() { }
     public MotorEx Intake;
-    public String intakeName = "ExpMotor3";
+    public String intakeName = "Intake";
     public Command intake(){
         return new SetPower(Intake,
                 1,

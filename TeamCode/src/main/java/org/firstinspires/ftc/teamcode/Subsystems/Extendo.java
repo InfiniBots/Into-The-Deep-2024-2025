@@ -18,7 +18,7 @@ public class Extendo extends Subsystem {
     public MotorEx Extendo;
     public static int tolerance = 10;
     public PIDFController controller = new PIDFController(0.005, 0.0, 0.0, new StaticFeedforward(0.0), 10);
-    public String extendoName = "ExpMotor2";
+    public String extendoName = "Extendo";
 
     public Command resetZero() {
         return new InstantCommand(() -> { Extendo.resetEncoder(); });

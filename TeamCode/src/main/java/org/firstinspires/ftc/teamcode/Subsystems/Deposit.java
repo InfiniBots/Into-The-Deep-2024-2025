@@ -12,8 +12,8 @@ public class Deposit extends Subsystem {
     private Deposit() { }
     public Servo rightServo;
     public Servo leftServo;
-    public String rightServoName = "Servo2";
-    public String leftServoName = "Servo3";
+    public String rightServoName = "rightDeposit";
+    public String leftServoName = "leftDeposit";
 
     public Command transferPosition() {
         return new MultipleServosToPosition(

@@ -10,7 +10,7 @@ public class Claw extends Subsystem {
     public static final Claw INSTANCE = new Claw();
     private Claw() { }
     public Servo Claw;
-    public String clawName = "Servo4";
+    public String clawName = "Claw";
 
     public Command Close() {
         return new ServoToPosition(Claw,
