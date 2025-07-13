@@ -3,19 +3,16 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
 import com.rowanmcalpin.nextftc.core.control.controllers.feedforward.StaticFeedforward;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.HoldPosition;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup;
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.ResetEncoder;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToPosition;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower;
 
-import java.util.Set;
-
-@Config
 public class Lift extends Subsystem {
     public static final Lift INSTANCE = new Lift();
     private Lift() { }
@@ -26,6 +23,10 @@ public class Lift extends Subsystem {
     public PIDFController controller = new PIDFController(0.005, 0.0, 0.0, new StaticFeedforward(0.0), tolerance);
     public String rightLiftName = "ExpMotor0";
     public String leftLiftName = "ExpMotor1";
+
+    public Command resetZero() {
+        return new InstantCommand(() -> { leftLift.resetEncoder(); rightLift.resetEncoder(); });
+    }
 
     public Command liftDown() {
         return new RunToPosition(liftMotors,
