@@ -3,17 +3,14 @@ package org.firstinspires.ftc.teamcode.Testing;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
 import com.rowanmcalpin.nextftc.core.control.controllers.feedforward.StaticFeedforward;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup;
 
-@TeleOp
 @Config
+@TeleOp
 public class ExtendoPID extends NextFTCOpMode {
 
     public static double f = 0.0;

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
-import com.rowanmcalpin.nextftc.core.command.utility.LambdaCommand;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
 import com.rowanmcalpin.nextftc.core.control.controllers.feedforward.StaticFeedforward;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
