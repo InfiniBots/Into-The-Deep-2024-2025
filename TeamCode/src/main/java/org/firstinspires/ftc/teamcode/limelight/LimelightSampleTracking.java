@@ -8,13 +8,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import java.util.List;
 
 public class LimelightSampleTracking {
-    private Limelight3A limelight;
-    private LLResultTypes.DetectorResult lockedSample = null;
-    private Telemetry telemetry;
-    private double limelightMountAngleDegrees = 65.0;
-    private double limelightLensHeightInches = 10.0;
-    private double sampleHeightInches = 1.5;
-    private double threshold = 2;
+    public Limelight3A limelight;
+    public LLResultTypes.DetectorResult lockedSample = null;
+    public Telemetry telemetry;
+    public double limelightMountAngleDegrees = 65.0;
+    public double limelightLensHeightInches = 10.0;
+    public double sampleHeightInches = 1.5;
+    public double threshold = 2;
 
     public LimelightSampleTracking(HardwareMap hardwareMap, Telemetry telemetry) {
         this.limelight = hardwareMap.get(Limelight3A.class, "limelight");
