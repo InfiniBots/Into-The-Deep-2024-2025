@@ -22,7 +22,7 @@ public class ExtendoPID extends NextFTCOpMode {
     public static double ticksPerRevolution = 384.5;
     public static double gearRatio = 1;
     public MotorEx extendoMotor;
-    public String extendoMotorName = "ExpMotor2";
+    public String extendoMotorName = "Extendo";
     private double calculateFeedforward() {
         return Math.cos(Math.toRadians(target / ((ticksPerRevolution * gearRatio)/360)) * f);
     }

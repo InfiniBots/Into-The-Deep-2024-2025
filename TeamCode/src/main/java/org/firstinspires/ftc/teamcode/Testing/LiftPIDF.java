@@ -25,8 +25,8 @@ public class LiftPIDF extends NextFTCOpMode {
     public MotorEx rightLift;
     public MotorEx leftLift;
     public MotorGroup liftMotors;
-    public String rightLiftName = "ExpMotor0";
-    public String leftLiftName = "ExpMotor1";
+    public String rightLiftName = "rightLift";
+    public String leftLiftName = "leftLift";
     private double calculateFeedforward() {
         return Math.cos(Math.toRadians(target / ((ticksPerRevolution * gearRatio)/360)) * f );
     }
