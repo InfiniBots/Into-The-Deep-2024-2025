@@ -1,20 +1,25 @@
-package org.firstinspires.ftc.teamcode.roadrunner_crap;
+package org.firstinspires.ftc.teamcode.Auton;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.DualNum;
-import com.acmerobotics.roadrunner.Time;
-import com.acmerobotics.roadrunner.Twist2dDual;
-import com.acmerobotics.roadrunner.Vector2d;
-import com.acmerobotics.roadrunner.Vector2dDual;
 import com.acmerobotics.roadrunner.ftc.Encoder;
 import com.acmerobotics.roadrunner.ftc.FlightRecorder;
+import com.acmerobotics.roadrunner.ftc.Localizer;
 import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
 import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
 import com.acmerobotics.roadrunner.ftc.RawEncoder;
+import com.acmerobotics.roadrunner.ftc.ThreeDeadWheelInputsMessage;
+import com.acmerobotics.roadrunner.geometry.DualNum;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.PoseVelocity2d;
+import com.acmerobotics.roadrunner.geometry.Time;
+import com.acmerobotics.roadrunner.geometry.Twist2dDual;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.geometry.Vector2dDual;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.messages.ThreeDeadWheelInputsMessage;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 @Config
 public final class ThreeDeadWheelLocalizer implements Localizer {
@@ -30,10 +35,12 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
 
     public final double inPerTick;
 
-    private double lastPar0Pos, lastPar1Pos, lastPerpPos;
+    private int lastPar0Pos, lastPar1Pos, lastPerpPos;
     private boolean initialized;
+    private Pose2d pose;
+    private final ArrayDeque<Pose2d> poseHistory = new ArrayDeque<>();
 
-    public ThreeDeadWheelLocalizer(HardwareMap hardwareMap, double inPerTick) {
+    public ThreeDeadWheelLocalizer(HardwareMap hardwareMap, double inPerTick, Pose2d initialPose) {
         // TODO: make sure your config has **motors** with these names (or change them)
         //   the encoders should be plugged into the slot matching the named motor
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
@@ -47,9 +54,27 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
         this.inPerTick = inPerTick;
 
         FlightRecorder.write("THREE_DEAD_WHEEL_PARAMS", PARAMS);
+
+        pose = initialPose;
     }
 
-    public Twist2dDual<Time> update() {
+    @Override
+    public void setPose(Pose2d pose) {
+        this.pose = pose;
+    }
+
+    @Override
+    public Pose2d getPose() {
+        return pose;
+    }
+
+    @Override
+    public ArrayList<Pose2d> getPoseHistory() {
+        return new ArrayList<>(poseHistory);
+    }
+
+    @Override
+    public PoseVelocity2d update() {
         PositionVelocityPair par0PosVel = par0.getPositionAndVelocity();
         PositionVelocityPair par1PosVel = par1.getPositionAndVelocity();
         PositionVelocityPair perpPosVel = perp.getPositionAndVelocity();
@@ -63,15 +88,12 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
             lastPar1Pos = par1PosVel.position;
             lastPerpPos = perpPosVel.position;
 
-            return new Twist2dDual<>(
-                    Vector2dDual.constant(new Vector2d(0.0, 0.0), 2),
-                    DualNum.constant(0.0, 2)
-            );
+            return new PoseVelocity2d(new Vector2d(0.0, 0.0), 0.0);
         }
 
-        double par0PosDelta = par0PosVel.position - lastPar0Pos;
-        double par1PosDelta = par1PosVel.position - lastPar1Pos;
-        double perpPosDelta = perpPosVel.position - lastPerpPos;
+        int par0PosDelta = par0PosVel.position - lastPar0Pos;
+        int par1PosDelta = par1PosVel.position - lastPar1Pos;
+        int perpPosDelta = perpPosVel.position - lastPerpPos;
 
         Twist2dDual<Time> twist = new Twist2dDual<>(
                 new Vector2dDual<>(
@@ -94,6 +116,13 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
         lastPar1Pos = par1PosVel.position;
         lastPerpPos = perpPosVel.position;
 
-        return twist;
+        pose = pose.plus(twist.value());
+
+        poseHistory.addFirst(pose);
+        if (poseHistory.size() > 100) {
+            poseHistory.removeLast();
+        }
+
+        return twist.velocity().value();
     }
 }
