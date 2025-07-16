@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 @Config
 @TeleOp
-public class ArmTesting extends OpMode {
+public class DepositTesting extends OpMode {
     Servo rightDeposit;
     Servo leftDeposit;
     public static double transferPos = 0.0;
