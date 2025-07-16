@@ -1,11 +1,10 @@
-package org.firstinspires.ftc.teamcode.Testing;
+package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
-import com.rowanmcalpin.nextftc.core.control.controllers.feedforward.StaticFeedforward;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 
@@ -24,7 +23,7 @@ public class ExtendoPID extends NextFTCOpMode {
     public MotorEx extendoMotor;
     public String extendoMotorName = "Extendo";
     private double calculateFeedforward() {
-        return Math.cos(Math.toRadians(target / ((ticksPerRevolution * gearRatio)/360)) * f);
+        return Math.cos(Math.toRadians(target / ((ticksPerRevolution * gearRatio)/360))) * f;
     }
     public PIDFController controller = new PIDFController(p, i, d, v -> calculateFeedforward(), 15);
     @Override
