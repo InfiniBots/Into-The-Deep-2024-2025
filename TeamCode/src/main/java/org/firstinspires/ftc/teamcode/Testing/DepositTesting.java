@@ -20,8 +20,8 @@ public class DepositTesting extends OpMode {
 
     @Override
     public void init() {
-        rightDeposit = hardwareMap.get(Servo.class, "Servo2");
-        leftDeposit = hardwareMap.get(Servo.class, "Servo3");
+        rightDeposit = hardwareMap.get(Servo.class, "rightDeposit");
+        leftDeposit = hardwareMap.get(Servo.class, "leftDeposit");
     }
     Gamepad currentGamepad1 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
