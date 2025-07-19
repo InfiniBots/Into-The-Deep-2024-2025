@@ -2,7 +2,10 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.conditionals.PassiveConditionalCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.statemachine.AdvancingCommand;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
 import com.rowanmcalpin.nextftc.core.control.controllers.feedforward.StaticFeedforward;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
@@ -17,26 +20,21 @@ public class Extendo extends Subsystem {
     private Extendo() { }
     public MotorEx Extendo;
     public static int tolerance = 10;
-    public PIDFController controller = new PIDFController(0.005, 0.0, 0.0, new StaticFeedforward(0.0), 10);
+    public PIDFController controller = new PIDFController(0.002, 0.0, 0.0, new StaticFeedforward(0.0), 10);
     public String extendoName = "Extendo";
-
-    public Command resetZero() {
-        return new InstantCommand(() -> { Extendo.resetEncoder(); });
-    }
 
     public Command Extend() {
         return new RunToPosition(Extendo,
-                2000.0,
+                1050,
                 controller,
                 this);
     }
 
-    public Command Retract() {
-         new RunToPosition(Extendo,
-                0.0,
+    public Command Detract() {
+        return new RunToPosition(Extendo,
+                -5,
                 controller,
                 this);
-        return new ResetEncoder(Extendo, this);
     }
 
     public Command extendoManualExtend()  {
@@ -51,7 +49,19 @@ public class Extendo extends Subsystem {
                 this);
     }
 
-
+    public boolean extendoSwitch = true;
+    public Command toggleExtendo() {
+        return new SequentialGroup(
+                new InstantCommand(() -> {
+                    extendoSwitch = !extendoSwitch;
+                }),
+                new PassiveConditionalCommand(
+                        () -> extendoSwitch,
+                        this::Extend,
+                        this::Detract
+                )
+        );
+    }
 
 
     @Override
@@ -61,7 +71,8 @@ public class Extendo extends Subsystem {
 
     @Override
     public void initialize()  {
-        Extendo = new MotorEx(extendoName);
+        Extendo = new MotorEx(extendoName).reverse();
+        Extendo.resetEncoder();
 
     }
 

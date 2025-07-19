@@ -8,21 +8,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @TeleOp
-@Disabled
 public class Drivetrain extends OpMode {
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;
     DcMotor backLeftMotor;
     DcMotor backRightMotor;
-    CRServo CRServo1;
+
 
     @Override
     public void init() {
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        CRServo1 = hardwareMap.get(CRServo.class, "CRServo1");
+        frontLeftMotor = hardwareMap.get(DcMotor.class, "leftFront");
+        backLeftMotor = hardwareMap.get(DcMotor.class, "leftRear");
+        backRightMotor = hardwareMap.get(DcMotor.class, "rightRear");
+        frontRightMotor = hardwareMap.get(DcMotor.class, "rightFront");
 
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -56,13 +54,10 @@ public class Drivetrain extends OpMode {
             backRight /= power + Math.abs(turn);
         }
 
-        frontLeftMotor.setPower(frontLeft/-1.25); /* hi cants*/
-        backLeftMotor.setPower(backLeft/-1.25);
-        frontRightMotor.setPower(frontRight/1.25);
-        backRightMotor.setPower(backRight/1.25);
-
-        CRServo1.setPower(gamepad1.right_trigger/-1);
-        CRServo1.setPower(gamepad1.left_trigger/1);
+        frontLeftMotor.setPower(frontLeft/-1);
+        backLeftMotor.setPower(backLeft/-1);
+        frontRightMotor.setPower(frontRight/1);
+        backRightMotor.setPower(backRight/1);
 
     }
 }

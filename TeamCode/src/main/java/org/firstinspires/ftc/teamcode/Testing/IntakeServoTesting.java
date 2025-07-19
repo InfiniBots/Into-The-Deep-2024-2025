@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Testing;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,10 +13,10 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 public class IntakeServoTesting extends OpMode {
     Servo rightIntake;
     Servo leftIntake;
-    public static double transferPos = 0.0;
-    public static double submersiblePos = 0.0;
-    public static double staticPos = 0.0;
-    public static double extraPos = 0.0;
+    public static double transferPos = 0.35, leftTransferPos = 1.0;
+    public static double submersiblePos = 0.675, leftSubmersiblePos = 0.5;
+    public static double staticPos = 0.0, leftStaticPos = 0.0;
+    public static double extraPos = 0.0, leftExtraPos = 0.0;
 
     @Override
     public void init() {
@@ -36,25 +38,24 @@ public class IntakeServoTesting extends OpMode {
         currentGamepad2.copy(gamepad2);
 
         if (currentGamepad1.a && !previousGamepad1.a) {
-            rightIntake.setPosition(transferPos);
-            leftIntake.setPosition(1 - transferPos);
+          rightIntake.setPosition(transferPos);
+           // leftIntake.setPosition(leftTransferPos);
         }
 
         if (currentGamepad1.b && !previousGamepad1.b) {
             rightIntake.setPosition(submersiblePos);
-            leftIntake.setPosition(1 - submersiblePos);
+          //  leftIntake.setPosition(leftSubmersiblePos);
         }
 
         if (currentGamepad1.x && !previousGamepad1.x) {
-            rightIntake.setPosition(staticPos);
-            leftIntake.setPosition(1 - staticPos);
+           rightIntake.setPosition(staticPos);
+          //  leftIntake.setPosition(leftStaticPos);
         }
 
         if (currentGamepad1.dpad_up && !previousGamepad1.dpad_up) {
-            rightIntake.setPosition(extraPos);
-            leftIntake.setPosition(1 - extraPos);
+           rightIntake.setPosition(extraPos);
+         //   leftIntake.setPosition(leftExtraPos);
         }
-
 
 
 

@@ -3,8 +3,13 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.conditionals.PassiveConditionalCommand;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.hardware.MultipleServosToPosition;
+import com.rowanmcalpin.nextftc.ftc.hardware.ServoToPosition;
+
 import java.util.List;
 
 public class IntakePivot extends Subsystem {
@@ -16,30 +21,42 @@ public class IntakePivot extends Subsystem {
     public String leftIntakeName = "leftIntakeServo";
 
     public Command transferPosition() {
-        return new MultipleServosToPosition(
-                List.of(rightIntake, leftIntake),
-                0.5,
-                this);
-    }
-
-    public Command Submersible() {
-        return new MultipleServosToPosition(
-                List.of(rightIntake, leftIntake),
-                -0.5,
-                this);
-    }
-
-    public Command staticPosition() {
-        return new MultipleServosToPosition(
-                List.of(rightIntake, leftIntake),
+        return new ServoToPosition(rightIntake,
                 0,
                 this);
+    }
+
+    public Command submersiblePosition() {
+        return new ServoToPosition(rightIntake,
+                0.35,
+                this);
+    }
+
+    public Command staticPos() {
+        return new ServoToPosition(rightIntake,
+                0.5125,
+                this);
+    }
+
+    public boolean intakePivotSwitch = true;
+    public Command toggleIntakePivot() {
+        return new SequentialGroup(
+                new InstantCommand(() -> {
+                    intakePivotSwitch = !intakePivotSwitch;
+                }),
+                new PassiveConditionalCommand(
+                        () -> intakePivotSwitch,
+                        this::submersiblePosition,
+                        this::transferPosition
+                )
+        );
     }
 
     @Override
     public void initialize()  {
         rightIntake = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, rightIntakeName);
         leftIntake = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, leftIntakeName);
+        rightIntake.setPosition(0);
         leftIntake.setDirection(Servo.Direction.REVERSE);
     }
 

@@ -17,16 +17,19 @@ public class ExtendoTesting extends OpMode  {
     @Override
     public void init() {
         Extendo = hardwareMap.get(DcMotorEx.class, "Extendo");
+        Extendo.setDirection(DcMotorSimple.Direction.REVERSE);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
     }
 
     @Override
     public void loop() {
-        Extendo.setPower(gamepad1.right_trigger); //extend
-        Extendo.setPower(gamepad1.left_trigger/-1); //retract
+        Extendo.setPower(gamepad1.left_stick_y);
+        //Detract 1050 -> 1115
+        //Extend -5 -> 5
 
-        telemetry.addData("RightLiftPos", Extendo.getCurrentPosition());
-        telemetry.addData("RightLiftPower", Extendo.getPower());
+        telemetry.addData("ExtendoPower", Extendo.getPower());
+        telemetry.addData("Extendopos", Extendo.getCurrentPosition());
+        telemetry.update();
 
 
     }

@@ -33,7 +33,7 @@ public class LiftTesting extends OpMode  {
         telemetry.addData("LeftLiftPos", leftLift.getCurrentPosition());
         telemetry.addData("RightLiftPower", rightLift.getPower());
         telemetry.addData("LeftLiftPower", leftLift.getPower());
-
+        telemetry.update();
 
     }
 }
