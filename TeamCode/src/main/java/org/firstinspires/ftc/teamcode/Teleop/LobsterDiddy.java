@@ -81,12 +81,9 @@ public class LobsterDiddy extends NextFTCOpMode {
                 Extendo.INSTANCE::toggleExtendo
         );
 
-        gamepadManager.getGamepad1().getLeftBumper().setPressedCommand(
-                () -> new ParallelGroup(
-                        Intake.INSTANCE.toggleIntake(),
-                        IntakePivot.INSTANCE.toggleIntakePivot()
-                )
-        );
+        gamepadManager.getGamepad1().getDpadUp().setPressedCommand(IntakePivot.INSTANCE::incrementalPos);
+        gamepadManager.getGamepad1().getDpadDown().setPressedCommand(IntakePivot.INSTANCE::decrementalPos);
+
 
         gamepadManager.getGamepad1().getLeftTrigger().setHeldCommand(value -> Intake.INSTANCE.Outtake());
         gamepadManager.getGamepad1().getLeftTrigger().setReleasedCommand(value -> Intake.INSTANCE.noPower());

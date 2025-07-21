@@ -20,25 +20,29 @@ public class IntakePivot extends Subsystem {
     public String rightIntakeName = "rightIntakeServo";
     public String leftIntakeName = "leftIntakeServo";
 
-    public Command transferPosition() {
-        return new ServoToPosition(rightIntake,
-                0,
-                this);
+
+    public double getPosition() {
+        return rightIntake.getPosition();
     }
 
-    public Command submersiblePosition() {
-        return new ServoToPosition(rightIntake,
-                0.35,
-                this);
+    public Command incrementalPos() {
+        return new InstantCommand(() -> {
+            double currentPos = rightIntake.getPosition();
+            double newPos = Math.min(1.0, currentPos + 0.1);
+            rightIntake.setPosition(newPos);
+        });
     }
 
-    public Command staticPos() {
-        return new ServoToPosition(rightIntake,
-                0.5125,
-                this);
+    public Command decrementalPos() {
+        return new InstantCommand(() -> {
+            double currentPos = rightIntake.getPosition();
+            double newPos = Math.min(1.0, currentPos - 0.1);
+            rightIntake.setPosition(newPos);
+        });
     }
 
-    public boolean intakePivotSwitch = true;
+
+    /* public boolean intakePivotSwitch = true;
     public Command toggleIntakePivot() {
         return new SequentialGroup(
                 new InstantCommand(() -> {
@@ -50,7 +54,7 @@ public class IntakePivot extends Subsystem {
                         this::transferPosition
                 )
         );
-    }
+    } */
 
     @Override
     public void initialize()  {
