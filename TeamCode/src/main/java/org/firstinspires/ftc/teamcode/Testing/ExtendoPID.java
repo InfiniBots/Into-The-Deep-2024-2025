@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -20,7 +21,7 @@ public class ExtendoPID extends OpMode {
 
     private PIDController controller;
     public static double f = 0.0;
-    public static double p = 0.002;
+    public static double p = 0.003;
     public static double d = 0.0;
     public static double i = 0.0;
     public static int target = 0;
@@ -38,7 +39,8 @@ public class ExtendoPID extends OpMode {
         Extendo = hardwareMap.get(DcMotorEx.class, "Extendo");
         Extendo.setDirection(DcMotorSimple.Direction.REVERSE);
         rightIntake = hardwareMap.get(Servo.class, "rightIntakeServo");
-        rightIntake.setPosition(0.35);
+        Extendo.setTargetPosition(0);
+        rightIntake.setPosition(0);
 
     }
 

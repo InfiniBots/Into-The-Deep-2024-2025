@@ -31,7 +31,7 @@ public class Drivetrain extends OpMode {
     @Override
     public void loop() {
 
-        double x = -gamepad1.left_stick_x;
+        double x = -gamepad1.left_stick_x * 1.1;
         double y = gamepad1.left_stick_y;
         double turn = gamepad1.right_stick_x;
 
