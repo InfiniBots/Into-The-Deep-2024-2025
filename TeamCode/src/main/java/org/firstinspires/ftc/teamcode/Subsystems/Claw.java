@@ -17,13 +17,13 @@ public class Claw extends Subsystem {
 
     public Command Close() {
         return new ServoToPosition(Claw,
-                0.7,
+                0.4,
                 this);
     }
 
     public Command Open() {
         return new ServoToPosition(Claw,
-                0.3,
+                0.85,
                 this);
     }
 

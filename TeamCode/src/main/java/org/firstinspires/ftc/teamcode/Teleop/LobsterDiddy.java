@@ -87,14 +87,6 @@ public class LobsterDiddy extends NextFTCOpMode {
                 Intake.INSTANCE::toggleIntake
         );
 
-        gamepadManager.getGamepad1().getA().setPressedCommand(
-                () -> new ParallelGroup(
-                        Claw.INSTANCE.toggleClaw(),
-                        Deposit.INSTANCE.toggleDeposit(),
-                        Wrist.INSTANCE.toggleWrist()
-                )
-        );
-
         gamepadManager.getGamepad1().getA().setPressedCommand(() -> {
             boolean goingToClose = !Claw.INSTANCE.clawSwitch;
 
@@ -102,24 +94,22 @@ public class LobsterDiddy extends NextFTCOpMode {
                 return new SequentialGroup(
                         Claw.INSTANCE.toggleClaw(),
                         new Delay(0.25),
-                        new ParallelGroup(
+                        new SequentialGroup(
                                 Deposit.INSTANCE.toggleDeposit(),
                                 Wrist.INSTANCE.toggleWrist()
                         )
                 );
             } else {
                 return new SequentialGroup(
-                        new ParallelGroup(
+                        new SequentialGroup(
                                 Deposit.INSTANCE.toggleDeposit(),
                                 Wrist.INSTANCE.toggleWrist()
                         ),
-                        new Delay(0.25),
+                        new Delay(1.0),
                         Claw.INSTANCE.toggleClaw()
                 );
             }
         });
-
-
 
 
         gamepadManager.getGamepad1().getX().setPressedCommand(

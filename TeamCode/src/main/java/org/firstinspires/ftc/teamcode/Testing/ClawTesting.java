@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 @TeleOp
 public class ClawTesting extends OpMode {
     Servo Claw;
-    public static double close = 0.0;
-    public static double open = 0.0;
+    public static double close = 0.55;
+    public static double open = 0.85;
 
     @Override
     public void init() {

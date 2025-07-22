@@ -1,31 +1,31 @@
 package org.firstinspires.ftc.teamcode.Testing;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.Subsystems.Wrist;
-
 @Config
 @TeleOp
-public class WristTesting extends OpMode {
-    Servo Wrist;
+public class LeftDepositTesting extends OpMode {
+    Servo rightDeposit;
+    Servo leftDeposit;
     public static double wallPos = 0.0;
     public static double chamberPreparePos = 0.0;
-    public static double chamberPos = 0.0;
+    public static double chamberPos = 1.0;
 
     @Override
     public void init() {
-        Wrist = hardwareMap.get(Servo.class, "Wrist");
+        rightDeposit = hardwareMap.get(Servo.class, "rightDeposit");
+        leftDeposit = hardwareMap.get(Servo.class, "leftDeposit");
     }
     Gamepad currentGamepad1 = new Gamepad();
     Gamepad currentGamepad2 = new Gamepad();
 
     Gamepad previousGamepad1 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
+
 
     @Override
     public void loop() {
@@ -36,14 +36,14 @@ public class WristTesting extends OpMode {
         currentGamepad2.copy(gamepad2);
 
         if (currentGamepad1.a && !previousGamepad1.a) {
-            Wrist.setPosition(wallPos);
+            leftDeposit.setPosition(wallPos);
         }
 
         if (currentGamepad1.b && !previousGamepad1.b) {
-            Wrist.setPosition(chamberPreparePos);
+            leftDeposit.setPosition(chamberPreparePos);
         }
         if (currentGamepad1.y && !previousGamepad1.y) {
-            Wrist.setPosition(chamberPos);
+            leftDeposit.setPosition(chamberPos);
         }
 
     }

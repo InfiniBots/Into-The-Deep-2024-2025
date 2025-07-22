@@ -8,6 +8,8 @@ import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.conditionals.PassiveConditionalCommand;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.hardware.MultipleServosToPosition;
+import com.rowanmcalpin.nextftc.ftc.hardware.ServoToPosition;
+
 import java.util.List;
 
 public class Deposit extends Subsystem {
@@ -19,23 +21,24 @@ public class Deposit extends Subsystem {
     public String leftServoName = "leftDeposit";
 
     public Command specimenWall() {
-        return new MultipleServosToPosition(
-                List.of(rightServo, leftServo),
-                0.9,
+        return new ServoToPosition(
+                rightServo,
+                0,
                 this);
     }
 
+
     public Command specimenChamberPrepare() {
-        return new MultipleServosToPosition(
-                List.of(rightServo, leftServo),
-                0.3,
-                this);
+        return new ServoToPosition(
+                     rightServo,
+                      1,
+                      this);
     }
 
     public Command specimenChamber() {
         return new MultipleServosToPosition(
                 List.of(rightServo, leftServo),
-                0.4,
+                0.8,
                 this);
     }
 
