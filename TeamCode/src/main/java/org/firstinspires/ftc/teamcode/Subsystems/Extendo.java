@@ -20,12 +20,12 @@ public class Extendo extends Subsystem {
     private Extendo() { }
     public MotorEx Extendo;
     public static int tolerance = 10;
-    public PIDFController controller = new PIDFController(0.003, 0.0, 0.0, new StaticFeedforward(0.0), 10);
+    public PIDFController controller = new PIDFController(0.009, 0.0, 0.0, new StaticFeedforward(0.0), 10);
     public String extendoName = "Extendo";
 
     public Command Extend() {
         return new RunToPosition(Extendo,
-                1200,
+                1500,
                 controller,
                 this);
     }

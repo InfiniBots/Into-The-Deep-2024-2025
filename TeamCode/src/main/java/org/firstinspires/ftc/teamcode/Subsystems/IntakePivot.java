@@ -33,6 +33,14 @@ public class IntakePivot extends Subsystem {
         });
     }
 
+    public Command intakeZeroPos() {
+        return new ServoToPosition(
+           rightIntake,
+            0,
+            this);
+    }
+
+
     public Command decrementalPos() {
         return new InstantCommand(() -> {
             double currentPos = rightIntake.getPosition();
@@ -60,8 +68,8 @@ public class IntakePivot extends Subsystem {
     public void initialize()  {
         rightIntake = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, rightIntakeName);
         leftIntake = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, leftIntakeName);
-        rightIntake.setPosition(0);
         leftIntake.setDirection(Servo.Direction.REVERSE);
+        rightIntake.setPosition(0);
     }
 
 }

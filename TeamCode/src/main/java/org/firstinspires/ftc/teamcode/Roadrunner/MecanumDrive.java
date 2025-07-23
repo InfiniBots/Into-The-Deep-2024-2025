@@ -61,9 +61,9 @@ public class MecanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.UP;
 
         // drive model parameters
-        public double inPerTick = 1; // SparkFun OTOS Note: you can probably leave this at 1
+        public double inPerTick = 1.0; // SparkFun OTOS Note: you can probably leave this at 1
         public double lateralInPerTick = 0.7523732311430573; //0.736834497757;// OTOS: 0.872882;
-        public double trackWidthTicks = 12.698491025795713; //12.791; // otos 12.66;
+        public double trackWidthTicks = 11.0; //12.791; // otos 12.66;
 
         // feedforward parameters (in tick units)
         public double kS = 1.046185469411772; //0.7635681070147831; // OTOS: 0.563756515907424;

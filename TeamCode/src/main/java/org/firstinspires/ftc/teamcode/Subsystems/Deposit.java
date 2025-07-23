@@ -36,8 +36,8 @@ public class Deposit extends Subsystem {
     }
 
     public Command specimenChamber() {
-        return new MultipleServosToPosition(
-                List.of(rightServo, leftServo),
+        return new ServoToPosition(
+                rightServo,
                 0.8,
                 this);
     }

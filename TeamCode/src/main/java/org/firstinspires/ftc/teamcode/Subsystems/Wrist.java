@@ -23,7 +23,7 @@ public class Wrist extends Subsystem {
 
     public Command specimenWall() {
         return new ServoToPosition(Wrist,
-                0.51,
+                0.465,
                 this);
     }
 
@@ -35,7 +35,7 @@ public class Wrist extends Subsystem {
 
     public Command specimenChamber() {
         return new ServoToPosition(Wrist,
-                0.9,
+                0.8,
                 this);
     }
 
