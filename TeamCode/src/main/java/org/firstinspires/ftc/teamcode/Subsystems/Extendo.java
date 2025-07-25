@@ -32,7 +32,7 @@ public class Extendo extends Subsystem {
 
     public Command Detract() {
         return new RunToPosition(Extendo,
-                0,
+                100,
                 controller,
                 this);
     }
