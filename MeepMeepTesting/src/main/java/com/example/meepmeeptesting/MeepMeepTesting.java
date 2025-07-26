@@ -24,33 +24,8 @@ public class MeepMeepTesting {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-4, 59, Math.toRadians(-90)))
-                .splineToConstantHeading(new Vector2d(-4.00, 27.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-4.00, 36.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-17.00, 38.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-36.00, 36.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-36.00, 28.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-36.00, 14.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-48.00, 12.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-48.00, 56.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-48.00, 12.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-58.00, 12.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-58.00, 56.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-58.00, 12.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-62.75, 12.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-62.75, 56.00), Math.toRadians(-90.00))
-
-
-
-
-
-
-
-
-
-
-
-                /*  .splineTo(new Vector2d(-4.00, 28.00), Math.toRadians(-90.00))
-                .splineToConstantHeading(new Vector2d(-4.00, 40.00), Math.toRadians(-90.00))
+                .splineToLinearHeading(new Pose2d(-4.00, 27.00, Math.toRadians(-90.00)), Math.toRadians(-90.00))
+                .splineToConstantHeading(new Vector2d(-4.00, 44.00), Math.toRadians(-90.00))
                 .splineToSplineHeading(new Pose2d(-21.94, 42.55, Math.toRadians(191.82)), Math.toRadians(191.82))
                 .splineToLinearHeading(new Pose2d(-38.00, 34.00, Math.toRadians(245.00)), Math.toRadians(270.00))
 

@@ -30,9 +30,10 @@
     import com.rowanmcalpin.nextftc.core.command.Command;
     import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower;
 
+    import java.security.acl.Group;
     import java.util.Set;
 
-    @TeleOp
+    @TeleOp(group = "A")
     public class LobsterDiddy extends NextFTCOpMode {
         public LobsterDiddy() {
             super( Extendo.INSTANCE, Intake.INSTANCE,  IntakePivot.INSTANCE, Deposit.INSTANCE, Wrist.INSTANCE, Claw.INSTANCE);
