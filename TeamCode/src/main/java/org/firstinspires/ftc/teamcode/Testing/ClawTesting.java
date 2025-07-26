@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class ClawTesting extends OpMode {
     Servo Claw;
     public static double close = 0.55;

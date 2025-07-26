@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.Subsystems.Wrist;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class WristTesting extends OpMode {
     Servo Wrist;
     public static double wallPos = 0.0;

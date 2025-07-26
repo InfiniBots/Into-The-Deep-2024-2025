@@ -33,7 +33,7 @@
     import java.security.acl.Group;
     import java.util.Set;
 
-    @TeleOp(group = "A")
+    @TeleOp
     public class LobsterDiddy extends NextFTCOpMode {
         public LobsterDiddy() {
             super( Extendo.INSTANCE, Intake.INSTANCE,  IntakePivot.INSTANCE, Deposit.INSTANCE, Wrist.INSTANCE, Claw.INSTANCE);

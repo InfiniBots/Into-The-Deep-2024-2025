@@ -10,7 +10,7 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup;
 
-@TeleOp
+@TeleOp(group = "Random Tests")
 @Config
 public class LiftPIDF extends NextFTCOpMode {
 

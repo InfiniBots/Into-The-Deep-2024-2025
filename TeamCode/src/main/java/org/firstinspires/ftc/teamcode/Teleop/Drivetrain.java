@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class Drivetrain extends OpMode {
     DcMotor frontLeftMotor;
     DcMotor frontRightMotor;

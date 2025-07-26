@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.Subsystems.Extendo;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class ExtendoTesting extends OpMode  {
     public DcMotorEx Extendo;
     @Override

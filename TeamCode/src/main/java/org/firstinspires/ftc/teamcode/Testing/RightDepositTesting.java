@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class RightDepositTesting extends OpMode {
     Servo rightDeposit;
     Servo leftDeposit;

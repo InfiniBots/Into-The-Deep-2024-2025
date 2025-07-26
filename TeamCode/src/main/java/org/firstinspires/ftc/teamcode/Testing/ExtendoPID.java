@@ -16,7 +16,7 @@ import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class ExtendoPID extends OpMode {
 
     private PIDController controller;

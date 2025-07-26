@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class LiftTesting extends OpMode  {
     public DcMotorEx rightLift;
     public DcMotorEx leftLift;

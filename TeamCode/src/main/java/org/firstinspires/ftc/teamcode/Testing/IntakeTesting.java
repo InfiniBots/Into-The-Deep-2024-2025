@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
-@TeleOp
+@TeleOp(group = "Random Tests")
 public class IntakeTesting extends OpMode  {
     public DcMotorEx Intake;
 
