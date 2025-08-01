@@ -105,7 +105,7 @@
                                     Deposit.INSTANCE.toggleDeposit(),
                                     Wrist.INSTANCE.toggleWrist()
                             ),
-                            new Delay(1.5),
+                            new Delay(1.0),
                             Claw.INSTANCE.toggleClaw()
                     );
                 }
